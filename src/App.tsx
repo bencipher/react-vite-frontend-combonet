@@ -13,7 +13,6 @@ import AddNewJob from "./pages/AddNewJobPage";
 import NotFound from "./pages/NotFound";
 import EditJob from "./pages/EditJobPage";
 import JobSearchResults from "./pages/JobSearchPage";
-import NextTopLoader from "nextjs-toploader";
 
 const App = () => {
   // Utility function to convert an object into query parameters

@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
-// import jobs from "../jobs.json"; //fix the coupling
 import Job from "./Job";
 import Spinner from "./Spinner";
+import siteDefaults from "../config/siteDefaults.json";
 
-const JobListings = ({ isHome = false }) => {
+const JobListings = ({ isHome = false, dataGetter = null }) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const apiUrl = `api/jobs${isHome ? "?_limit=3" : ""}`;
       try {
-        const res = await fetch(apiUrl);
-        const data = await res.json();
+        const responseData = await dataGetter();
+        const data = isHome
+          ? responseData.slice(0, siteDefaults.homepageJobCount)
+          : responseData;
+        // fi this to dynamically pass limit from config
         setJobs(data);
       } catch (error) {
         console.log("Error fetching jobs ", error);

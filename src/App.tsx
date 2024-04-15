@@ -12,6 +12,8 @@ import BaseLayout from "./layouts/BaseLayout";
 import AddNewJob from "./pages/AddNewJobPage";
 import NotFound from "./pages/NotFound";
 import EditJob from "./pages/EditJobPage";
+import JobSearchResults from "./pages/JobSearchPage";
+import NextTopLoader from "nextjs-toploader";
 
 const App = () => {
   // Utility function to convert an object into query parameters
@@ -78,11 +80,26 @@ const App = () => {
       console.log("Error searching jobs ", error);
     }
   };
+
+  const fetchJobs = async () => {
+    const apiUrl = "api/jobs";
+    try {
+      const res = await fetch(apiUrl);
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log("Error fetching jobs ", error);
+    }
+  };
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<BaseLayout searchHandler={searchJob} />}>
-        <Route index element={<HomePage />} />
-        <Route path="jobs" element={<JobListing />} />
+        <Route index element={<HomePage data={fetchJobs} />} />
+        <Route path="jobs" element={<JobListing data={fetchJobs} />} />
+        <Route
+          path="jobs/search"
+          element={<JobSearchResults data={fetchJobs} />}
+        />
         <Route
           path="jobs/:id"
           element={<JobDetail deleteJob={deleteJob} />}
@@ -101,6 +118,7 @@ const App = () => {
       </Route>
     )
   );
+  console.log(router);
   return <RouterProvider router={router} />;
 };
 

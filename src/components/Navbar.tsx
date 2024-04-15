@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/images/logo.png";
+import navData from "../config/menu.json";
 import { NavLink } from "react-router-dom";
 const Navbar = () => {
   const linkClass = ({ isActive }) =>
@@ -17,18 +18,11 @@ const Navbar = () => {
             </NavLink>
             <div className="md:ml-auto">
               <div className="flex space-x-2">
-                <NavLink to="/" className={linkClass}>
-                  Home
-                </NavLink>
-                <NavLink to="/jobs" className={linkClass}>
-                  Jobs
-                </NavLink>
-                <NavLink to="/add-job" className={linkClass}>
-                  Add Job
-                </NavLink>
-                <NavLink to="/blogs" className={linkClass}>
-                  Blog & Articles
-                </NavLink>
+                {navData.map((item) => (
+                  <NavLink key={item.label} to={item.to} className={linkClass}>
+                    {item.label}
+                  </NavLink>
+                ))}
               </div>
             </div>
           </div>

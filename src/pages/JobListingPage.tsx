@@ -1,8 +1,8 @@
 import React from "react";
 import JobListings from "../components/JobListings";
 
-const JobListing = () => {
-  return <JobListings />;
+const JobListing = ({ data }) => {
+  return <JobListings dataGetter={data} />;
 };
 
 export default JobListing;

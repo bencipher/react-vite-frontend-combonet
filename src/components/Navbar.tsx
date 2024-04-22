@@ -29,7 +29,7 @@ const Navbar = () => {
           <div className="flex flex-1 items-center justify-between md:items-stretch">
             <div className="order-0">
               <NavLink
-                className="flex flex-shrink-0 items-center mr-4 md:ml-6"
+                className="flex flex-shrink-0 items-center mr-4 md:ml-3 pt-2"
                 to="/"
               >
                 <img className="h-10 w-auto" src={logo} alt="React Jobs" />
@@ -77,7 +77,7 @@ const Navbar = () => {
                 <>
                   {menu.hasChildren ? (
                     <li
-                      className=" group relative cursor-pointer pt-2"
+                      className=" group relative cursor-pointer pt-2 w-20"
                       id="dropdown-button"
                     >
                       <span
@@ -102,7 +102,7 @@ const Navbar = () => {
                       </span>
                       <ul
                         id="dropdown"
-                        className={`nav-dropdown-list mx-auto duration-300 lg:invisible lg:opacity-0 lg:block lg:h-auto lg:w-[11.5rem] lg:group-hover:visible lg:group-hover:opacity-100 lg:left-[-99px] text-right text-white ${
+                        className={`relative nav-dropdown-list mx-auto duration-300 lg:invisible lg:opacity-0 lg:block lg:h-auto lg:w-[11.5rem] lg:group-hover:visible lg:group-hover:opacity-100 lg:left-[-99px] text-right text-white ${
                           isDropdownVisible ? "" : ""
                         }`}
                       >

@@ -113,7 +113,9 @@ const Navbar = () => {
                     </li>
                   ) : (
                     <li className="nav-item">
-                      <NavLink to={menu.to}>{menu.label}</NavLink>
+                      <NavLink className={linkClass} to={menu.to}>
+                        {menu.label}
+                      </NavLink>
                     </li>
                   )}
                 </>

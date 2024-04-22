@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useId, useRef, useState } from "react";
 import logo from "../assets/images/logo.png";
 import navData from "../config/menu.json";
 import { NavLink, useLocation } from "react-router-dom";
@@ -8,6 +8,7 @@ const { main }: { main: NavigationLink[] } = navData;
 
 const Navbar = () => {
   const dropdownRef = useRef(null);
+  const id = useId();
   const location = useLocation();
   const pathname = location.pathname;
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -23,11 +24,14 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white border-b">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-4">
-        <div className="flex h-20 justify-between">
+      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 py-4">
+        <div className="flex h-20 justify-between pt-2">
           <div className="flex flex-1 items-center justify-between md:items-stretch">
             <div className="order-0">
-              <NavLink className="flex flex-shrink-0 items-center mr-4" to="/">
+              <NavLink
+                className="flex flex-shrink-0 items-center mr-4 md:ml-6"
+                to="/"
+              >
                 <img className="h-10 w-auto" src={logo} alt="React Jobs" />
               </NavLink>
             </div>
@@ -67,13 +71,13 @@ const Navbar = () => {
             </label>
             <ul
               id="nav-menu"
-              className="navbar-nav order-3 w-full lg:order-1 lg:flex lg:w-auto lg:space-x-2"
+              className="navbar-nav order-3 w-full lg:order-1 lg:flex lg:w-auto lg:space-x-2 pt-2"
             >
               {main.map((menu) => (
                 <>
                   {menu.hasChildren ? (
                     <li
-                      className=" group relative cursor-pointer "
+                      className=" group relative cursor-pointer pt-2"
                       id="dropdown-button"
                     >
                       <span

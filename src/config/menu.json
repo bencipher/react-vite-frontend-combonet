@@ -1,18 +1,55 @@
-[
-  {
-    "label": "Home",
-    "to": "/"
-  },
-  {
-    "label": "Jobs",
-    "to": "/jobs"
-  },
-  {
-    "label": "Add Job",
-    "to": "/add-job"
-  },
-  {
-    "label": "Blog & Articles",
-    "to": "/blogs"
-  }
-]
+{
+  "main": [
+    {
+      "label": "Home",
+      "to": "/"
+    },
+    {
+      "label": "Jobs",
+      "to": "/jobs"
+    },
+    {
+      "label": "Add Job",
+      "to": "/add-job"
+    },
+    {
+      "label": "Blog & Articles",
+      "to": "/blogs"
+    },
+    {
+      "label": "Pages",
+      "to": "",
+      "hasChildren": true,
+      "children": [
+        {
+          "label": "Career",
+          "to": "/career"
+        },
+
+        {
+          "label": "Integrations",
+          "to": "/integrations"
+        }
+      ]
+    }
+  ],
+
+  "footer": [
+    {
+      "label": "Learn Skill",
+      "to": "https://www.combonettechnology.com/training/bootcamp/register"
+    },
+    {
+      "label": "Privacy",
+      "to": "/privacy"
+    },
+    {
+      "label": "Terms",
+      "to": "/terms"
+    },
+    {
+      "label": "Sitemap",
+      "to": "/sitemap"
+    }
+  ]
+}

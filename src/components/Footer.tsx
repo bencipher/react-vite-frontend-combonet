@@ -22,9 +22,9 @@ const Navbar = () => {
     <nav className="bg-black border-none">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-8">
         <div className="flex h-30 items-center justify-between pt-5">
-          <div className="flex flex-col flex-1 items-center md:flex-row">
+          <div className="flex flex-col flex-1 items-center md:flex-row text-2xl">
             {/* <!-- Logo --> */}
-            <span className="hidden md:block text-white text-center text-lg ml-2 mr-2">
+            <span className="hidden md:block text-white text-center text-lg ml-2 mr-2 mb-2 hover:bg-slate-300">
               Powered by
             </span>
             <NavLink

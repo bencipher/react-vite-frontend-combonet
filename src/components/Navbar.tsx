@@ -45,9 +45,7 @@ const Navbar = () => {
             <label
               id="show-button"
               htmlFor="nav-toggle"
-              className={`${
-                isDropdownVisible ? "hidden" : ""
-              } order-2 flex cursor-pointer items-center lg:order-1 lg:hidden`}
+              className={`order-2 flex cursor-pointer items-center lg:order-1 lg:hidden`}
             >
               <svg className="h-6 fill-current" viewBox="0 0 20 20">
                 <title>Menu Open</title>
@@ -57,9 +55,7 @@ const Navbar = () => {
             <label
               id="hide-button"
               htmlFor="nav-toggle"
-              className={`order-2 ${
-                isDropdownVisible ? "" : "hidden"
-              } cursor-pointer items-center lg:order-1`}
+              className={`order-2 hidden cursor-pointer items-center lg:hidden lg:order-1`}
             >
               <svg className="h-6 fill-current" viewBox="0 0 20 20">
                 <title>Menu Close</title>
@@ -71,7 +67,7 @@ const Navbar = () => {
             </label>
             <ul
               id="nav-menu"
-              className="navbar-nav order-3 w-full lg:order-1 lg:flex lg:w-auto lg:space-x-2 pt-2"
+              className=" navbar-nav order-3 w-full lg:order-1 lg:flex lg:w-auto lg:space-x-2 pt-2"
             >
               {main.map((menu) => (
                 <>
@@ -102,8 +98,9 @@ const Navbar = () => {
                       </span>
                       <ul
                         id="dropdown"
-                        className={`relative nav-dropdown-list mx-auto duration-300 lg:invisible lg:opacity-0 lg:block lg:h-auto lg:w-[11.5rem] lg:group-hover:visible lg:group-hover:opacity-100 lg:left-[-99px] text-right text-white ${
-                          isDropdownVisible ? "" : ""
+                        className={`relative nav-dropdown-list mx-auto duration-300 lg:invisible lg:opacity-0 lg:block lg:h-auto lg:w-[11.5rem] 
+                        lg:group-hover:visible lg:group-hover:opacity-100 lg:left-[-99px] text-right text-white ${
+                          isDropdownVisible ? "" : "hidden"
                         }`}
                       >
                         {menu.children?.map((child) => (

@@ -32,6 +32,7 @@ const AddNewJob = ({ addJobSubmit }) => {
     addJobSubmit(newJob);
     return navigate("/jobs");
   };
+  console.log("Supposed to add new job");
   return (
     <section className="bg-indigo-50">
       <div className="container m-auto max-w-2xl py-24">

@@ -2,12 +2,15 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../styles/main.scss";
 import SearchBar from "../components/SearchBar";
 import Footer from "../components/Footer";
+import BeltComponent from "../components/BeltComponent";
 
-const BaseLayout = ({ searchHandler }) => {
+const BaseLayout = ({ currentUser, searchHandler, login, logout }) => {
   return (
     <>
+      <BeltComponent user={currentUser} onLogin={login} onLogout={logout} />
       <Navbar />
       <Outlet />
       <SearchBar searchFunction={searchHandler} />

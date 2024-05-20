@@ -2,7 +2,9 @@ import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
 import { toast } from "react-toastify";
 
+console.log("About Rendering Job Detail Page");
 const JobDetailPage = ({ deleteJob }) => {
+  console.log("Should Render now");
   const { id } = useParams();
   const job = useLoaderData();
   const navigate = useNavigate();
@@ -19,19 +21,29 @@ const JobDetailPage = ({ deleteJob }) => {
 
     navigate("/jobs");
   };
+
+  // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  // const [userMetadata, setUserMetadata] = useState(null);
+
+  // return (
+  //   <>
+  //     <h1>JOB DETAIL PAGE</h1>
+  //   </>
+  // );
   return (
     <>
-      <section>
-        <div className="container m-auto py-6 px-6">
-          <Link
-            to="/jobs"
-            className="text-indigo-500 hover:text-indigo-600 flex items-center"
-          >
-            <FaArrowLeft className="mr-2" /> Back to Job Listings
-          </Link>
-        </div>
-      </section>
-
+      {isAuthenticated && (
+        <section>
+          <div className="container m-auto py-6 px-6">
+            <Link
+              to="/jobs"
+              className="text-indigo-500 hover:text-indigo-600 flex items-center"
+            >
+              <FaArrowLeft className="mr-2" /> Back to Job Listings
+            </Link>
+          </div>
+        </section>
+      )}
       <section className="bg-indigo-50">
         <div className="container m-auto py-10 px-6">
           <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">

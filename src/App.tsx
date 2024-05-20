@@ -1,21 +1,28 @@
 import React from "react";
 import {
+  BrowserRouter,
   Route,
+  RouterProvider,
+  Routes,
   createBrowserRouter,
   createRoutesFromElements,
-  RouterProvider,
 } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import JobListing from "./pages/JobListingPage";
-import JobDetail, { jobLoader } from "./pages/JobDetailPage";
+import JobDetailPage, { jobLoader } from "./pages/JobDetailPage";
 import BaseLayout from "./layouts/BaseLayout";
 import AddNewJob from "./pages/AddNewJobPage";
 import NotFound from "./pages/NotFound";
 import EditJob from "./pages/EditJobPage";
 import JobSearchResults from "./pages/JobSearchPage";
+import { useAuth0 } from "@auth0/auth0-react";
+import ProtectedRoute from "./components/auth/ProtectedRouter";
+import Callback from "./pages/Callback";
+import { Auth0ProviderWithNavigate } from "./auth0-provider-with-navigate";
 
 const App = () => {
-  // Utility function to convert an object into query parameters
+  console.log("in here");
+  console.log(import.meta.env.VITE_AUTH0_DOMAIN);
   const buildQueryParameters = (
     filters: Record<string, string | undefined>
   ) => {
@@ -90,35 +97,146 @@ const App = () => {
       console.log("Error fetching jobs ", error);
     }
   };
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path="/" element={<BaseLayout searchHandler={searchJob} />}>
+  const { user, loginWithRedirect, logout } = useAuth0();
+  console.log("user is ", JSON.stringify(user, null, 2));
+  const loginFxn = async () => {
+    loginWithRedirect();
+  };
+
+  const logoutFxn = () => {
+    console.log("is logout working");
+    console.log(window.location.origin);
+    logout({ logoutParams: { returnTo: window.location.origin } });
+  };
+  const RoutesJSX = (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <BaseLayout
+            currentUser={user}
+            searchHandler={searchJob}
+            login={loginFxn}
+            logout={logoutFxn}
+          />
+        }
+      >
         <Route index element={<HomePage data={fetchJobs} />} />
         <Route path="jobs" element={<JobListing data={fetchJobs} />} />
+        <Route path="callback" element={<Callback />} />
         <Route
           path="jobs/search"
           element={<JobSearchResults data={fetchJobs} />}
         />
-        <Route
-          path="jobs/:id"
-          element={<JobDetail deleteJob={deleteJob} />}
-          loader={jobLoader}
-        />
-        <Route
-          path="add-job"
-          element={<AddNewJob addJobSubmit={saveJobHandler} />}
-        />
-        <Route
-          path="/jobs/edit/:id"
-          element={<EditJob updateJobSubmit={updateJob} />}
-          loader={jobLoader}
-        />
         <Route path="*" element={<NotFound />} />
+        <Route
+          path="/jobs/:id"
+          element={<JobDetailPage deleteJob={deleteJob} />}
+          loader={jobLoader}
+        />
       </Route>
-    )
+    </Routes>
   );
-  console.log(router);
-  return <RouterProvider router={router} />;
+
+  // const router = createBrowserRouter(createRoutesFromElements(RoutesJSX));
+  // return <RouterProvider router={router} />;
+  return RoutesJSX;
+
+  // Utility function to convert an object into query parameters
+
+  {
+    /* <Route
+        path="jobs/:id"
+        element={
+          <ProtectedRoute element={<JobDetailPage deleteJob={deleteJob} />} />
+        }
+        loader={jobLoader}
+      /> */
+  }
+  {
+    /* <Route
+        path="add-job"
+        element={
+          <ProtectedRoute
+            element={
+              <ProtectedRoute
+                element={AddNewJob}
+                addJobSubmit={saveJobHandler}
+              />
+            }
+          />
+        }
+      /> */
+  }
+
+  {
+    /* <Route
+        path="/jobs/edit/:id"
+        element={
+          <ProtectedRoute element={<EditJob updateJobSubmit={updateJob} />} />
+        }
+        loader={jobLoader}
+      /> */
+  }
+
+  // return (
+  //   <Routes>
+  //     <Route
+  //       path="/"
+  //       element={
+  //         <BaseLayout
+  //           currentUser={user}
+  //           searchHandler={searchJob}
+  //           login={loginFxn}
+  //           logout={logoutFxn}
+  //         />
+  //       }
+  //     >
+  //       <Route index element={<HomePage data={fetchJobs} />} />
+  //       <Route path="jobs" element={<JobListing data={fetchJobs} />} />
+  //       <Route path="callback" element={<Callback />} />
+  //       <Route
+  //         path="jobs/search"
+  //         element={<JobSearchResults data={fetchJobs} />}
+  //       />
+  //       <Route path="*" element={<NotFound />} />
+  //       <Route
+  //         path="/jobs/:id"
+  //         element={<JobDetailPage deleteJob={deleteJob} />}
+  //         loader={jobLoader}
+  //       />
+  //       <Route
+  //         path="jobs/:id"
+  //         element={
+  //           <ProtectedRoute element={<JobDetailPage deleteJob={deleteJob} />} />
+  //         }
+  //         loader={jobLoader}
+  //       />
+  //       <Route
+  //         path="add-job"
+  //         element={
+  //           <ProtectedRoute
+  //             element={
+  //               <ProtectedRoute
+  //                 element={AddNewJob}
+  //                 addJobSubmit={saveJobHandler}
+  //               />
+  //             }
+  //           />
+  //         }
+  //       />
+
+  //       <Route
+  //         path="/jobs/edit/:id"
+  //         element={
+  //           <ProtectedRoute element={<EditJob updateJobSubmit={updateJob} />} />
+  //         }
+  //         loader={jobLoader}
+  //       />
+  //     </Route>
+  //   </Routes>
+  // );
 };
+
 
 export default App;

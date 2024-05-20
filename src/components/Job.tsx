@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { FaMapMarker } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -20,6 +21,7 @@ interface CompanyType {
 
 const Job = <T extends JobType>({ jobDetails }: { jobDetails: T }) => {
   const [showFullDesc, setShowFullDesc] = useState(false);
+
   let description = jobDetails.description;
 
   if (!showFullDesc) {

@@ -1,6 +1,7 @@
 import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useAuth0 } from "@auth0/auth0-react";
 
 console.log("About Rendering Job Detail Page");
 const JobDetailPage = ({ deleteJob }) => {
@@ -22,7 +23,7 @@ const JobDetailPage = ({ deleteJob }) => {
     navigate("/jobs");
   };
 
-  // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   // const [userMetadata, setUserMetadata] = useState(null);
 
   // return (

@@ -6,6 +6,7 @@ import {
   Routes,
   createBrowserRouter,
   createRoutesFromElements,
+  useNavigate,
 } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import JobListing from "./pages/JobListingPage";
@@ -21,6 +22,7 @@ import Callback from "./pages/Callback";
 import { Auth0ProviderWithNavigate } from "./auth0-provider-with-navigate";
 
 const App = () => {
+  // navigate = useNavigate()
   console.log("in here");
   console.log(import.meta.env.VITE_AUTH0_DOMAIN);
   const buildQueryParameters = (
@@ -109,133 +111,51 @@ const App = () => {
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
   const RoutesJSX = (
-    <Routes>
+    <Route
+      path="/"
+      element={
+        <BaseLayout
+          currentUser={user}
+          searchHandler={searchJob}
+          login={loginFxn}
+          logout={logoutFxn}
+        />
+      }
+    >
+      <Route index element={<HomePage data={fetchJobs} />} />
+      <Route path="jobs" element={<JobListing data={fetchJobs} />} />
+      <Route path="callback" element={<Callback />} />
       <Route
-        path="/"
+        path="jobs/search"
+        element={<JobSearchResults data={fetchJobs} />}
+      />
+      <Route path="*" element={<NotFound />} />
+      <Route
+        path="/jobs/:id"
         element={
-          <BaseLayout
-            currentUser={user}
-            searchHandler={searchJob}
-            login={loginFxn}
-            logout={logoutFxn}
-          />
-        }
-      >
-        <Route index element={<HomePage data={fetchJobs} />} />
-        <Route path="jobs" element={<JobListing data={fetchJobs} />} />
-        <Route path="callback" element={<Callback />} />
-        <Route
-          path="jobs/search"
-          element={<JobSearchResults data={fetchJobs} />}
-        />
-        <Route path="*" element={<NotFound />} />
-        <Route
-          path="/jobs/:id"
-          element={<JobDetailPage deleteJob={deleteJob} />}
-          loader={jobLoader}
-        />
-      </Route>
-    </Routes>
-  );
-
-  // const router = createBrowserRouter(createRoutesFromElements(RoutesJSX));
-  // return <RouterProvider router={router} />;
-  return RoutesJSX;
-
-  // Utility function to convert an object into query parameters
-
-  {
-    /* <Route
-        path="jobs/:id"
-        element={
-          <ProtectedRoute element={<JobDetailPage deleteJob={deleteJob} />} />
+          <ProtectedRoute element={JobDetailPage} deleteJob={deleteJob} />
         }
         loader={jobLoader}
-      /> */
-  }
-  {
-    /* <Route
+      />
+      <Route
         path="add-job"
         element={
-          <ProtectedRoute
-            element={
-              <ProtectedRoute
-                element={AddNewJob}
-                addJobSubmit={saveJobHandler}
-              />
-            }
-          />
+          <ProtectedRoute element={AddNewJob} addJobSubmit={saveJobHandler} />
         }
-      /> */
-  }
+      />
 
-  {
-    /* <Route
+      <Route
         path="/jobs/edit/:id"
         element={
-          <ProtectedRoute element={<EditJob updateJobSubmit={updateJob} />} />
+          <ProtectedRoute element={EditJob} updateJobSubmit={updateJob} />
         }
         loader={jobLoader}
-      /> */
-  }
+      />
+    </Route>
+  );
 
-  // return (
-  //   <Routes>
-  //     <Route
-  //       path="/"
-  //       element={
-  //         <BaseLayout
-  //           currentUser={user}
-  //           searchHandler={searchJob}
-  //           login={loginFxn}
-  //           logout={logoutFxn}
-  //         />
-  //       }
-  //     >
-  //       <Route index element={<HomePage data={fetchJobs} />} />
-  //       <Route path="jobs" element={<JobListing data={fetchJobs} />} />
-  //       <Route path="callback" element={<Callback />} />
-  //       <Route
-  //         path="jobs/search"
-  //         element={<JobSearchResults data={fetchJobs} />}
-  //       />
-  //       <Route path="*" element={<NotFound />} />
-  //       <Route
-  //         path="/jobs/:id"
-  //         element={<JobDetailPage deleteJob={deleteJob} />}
-  //         loader={jobLoader}
-  //       />
-  //       <Route
-  //         path="jobs/:id"
-  //         element={
-  //           <ProtectedRoute element={<JobDetailPage deleteJob={deleteJob} />} />
-  //         }
-  //         loader={jobLoader}
-  //       />
-  //       <Route
-  //         path="add-job"
-  //         element={
-  //           <ProtectedRoute
-  //             element={
-  //               <ProtectedRoute
-  //                 element={AddNewJob}
-  //                 addJobSubmit={saveJobHandler}
-  //               />
-  //             }
-  //           />
-  //         }
-  //       />
-
-  //       <Route
-  //         path="/jobs/edit/:id"
-  //         element={
-  //           <ProtectedRoute element={<EditJob updateJobSubmit={updateJob} />} />
-  //         }
-  //         loader={jobLoader}
-  //       />
-  //     </Route>
-  //   </Routes>
-  // );
+  const router = createBrowserRouter(createRoutesFromElements(RoutesJSX));
+  return <RouterProvider router={router} />;
 };
 
 

@@ -73,6 +73,7 @@ const Navbar = () => {
                 <>
                   {menu.hasChildren ? (
                     <li
+                      key={menu.label}
                       className=" group relative cursor-pointer pt-2 w-20"
                       id="dropdown-button"
                     >
@@ -113,7 +114,7 @@ const Navbar = () => {
                       </ul>
                     </li>
                   ) : (
-                    <li className="nav-item">
+                    <li key={menu.label} className="nav-item">
                       <NavLink className={linkClass} to={menu.to}>
                         {menu.label}
                       </NavLink>

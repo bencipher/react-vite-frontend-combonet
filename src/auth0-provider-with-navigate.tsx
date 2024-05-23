@@ -1,5 +1,5 @@
 import { Auth0Provider } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom";
+import { randomBytes } from "./utils/auth";
 
 interface Auth0ProviderWithNavigateProps {
   children: React.ReactNode;
@@ -7,18 +7,17 @@ interface Auth0ProviderWithNavigateProps {
 export const Auth0ProviderWithNavigate = ({
   children,
 }: Auth0ProviderWithNavigateProps) => {
-  // const navigate = useNavigate();
-
   const domain = import.meta.env.VITE_AUTH0_DOMAIN;
   const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-  // const onRedirectCallback = (appState: any) => {
-  //   navigate(appState?.returnTo || import.meta.env.VITE_AUTH0_CALLBACK_URL);
-  // };
+  const onRedirectCallback = (appState: AppState) => {
+    window.location.replace(import.meta.env.VITE_AUTH0_CALLBACK_URL);
+  };
 
   if (!(domain && clientId && import.meta.env.VITE_AUTH0_CALLBACK_URL)) {
     return null;
   }
-
+  const nonce = randomBytes(256);
+  sessionStorage.setItem("auth_nonce", nonce);
   return (
     <Auth0Provider
       domain={domain}
@@ -26,8 +25,10 @@ export const Auth0ProviderWithNavigate = ({
       authorizationParams={{
         redirect_uri: import.meta.env.VITE_AUTH0_CALLBACK_URL,
         audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+        state: nonce,
+        // nonce: "constantstringbymefornonce",
       }}
-      // onRedirectCallback={onRedirectCallback}
+      onRedirectCallback={onRedirectCallback}
     >
       {children}
     </Auth0Provider>

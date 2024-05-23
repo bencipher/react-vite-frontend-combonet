@@ -124,11 +124,11 @@ const App = () => {
     >
       <Route index element={<HomePage data={fetchJobs} />} />
       <Route path="jobs" element={<JobListing data={fetchJobs} />} />
-      <Route path="callback" element={<Callback />} />
       <Route
         path="jobs/search"
         element={<JobSearchResults data={fetchJobs} />}
       />
+      <Route path="callback" element={<Callback />} />
       <Route path="*" element={<NotFound />} />
       <Route
         path="/jobs/:id"

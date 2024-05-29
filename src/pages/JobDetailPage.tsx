@@ -8,6 +8,10 @@ const JobDetailPage = ({ deleteJob }) => {
   console.log("Should Render now");
   const { id } = useParams();
   const job = useLoaderData();
+  console.log(job);
+  if (job && Object.keys(job).length === 0) {
+    console.log("should raise 404 error");
+  }
   const navigate = useNavigate();
   const onDeleteClick = (jobId) => {
     const confirm = window.confirm(
@@ -124,8 +128,21 @@ const JobDetailPage = ({ deleteJob }) => {
 
 const jobLoader = async ({ params }) => {
   const res = await fetch(`/api/jobs/${params.id}`);
+
+  if (!res.ok) {
+    throw new Error(
+      `Error fetching job with ID ${params.id}: ${res.statusText}`
+    );
+  }
+
   const data = await res.json();
+
+  if (!data || Object.keys(data).length === 0) {
+    throw new Error(`Job with ID ${params.id} does not exist.`);
+  }
+
   return data;
 };
+
 
 export { JobDetailPage as default, jobLoader };

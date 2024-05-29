@@ -1,30 +1,30 @@
-import React from "react";
 import {
-  BrowserRouter,
   Route,
   RouterProvider,
-  Routes,
   createBrowserRouter,
   createRoutesFromElements,
-  useNavigate,
 } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import JobListing from "./pages/JobListingPage";
 import JobDetailPage, { jobLoader } from "./pages/JobDetailPage";
 import BaseLayout from "./layouts/BaseLayout";
 import AddNewJob from "./pages/AddNewJobPage";
-import NotFound from "./pages/NotFound";
 import EditJob from "./pages/EditJobPage";
 import JobSearchResults from "./pages/JobSearchPage";
 import { useAuth0 } from "@auth0/auth0-react";
 import ProtectedRoute from "./components/auth/ProtectedRouter";
 import Callback from "./pages/Callback";
-import { Auth0ProviderWithNavigate } from "./auth0-provider-with-navigate";
+import axiosInstance from "./utils/axios";
+import { handleAxiosError } from "./errors/axioxErrorHandler";
+import { useState } from "react";
+import ErrorPage from "./pages/ErrorPage";
+import { ErrorProvider } from "./errors/ErrorContext";
+import ErrorBoundary from "./errors/ErrorBoundary";
 
 const App = () => {
-  // navigate = useNavigate()
-  console.log("in here");
-  console.log(import.meta.env.VITE_AUTH0_DOMAIN);
+  const [error, setError] = useState<{ code: number; message: string } | null>(
+    null
+  );
   const buildQueryParameters = (
     filters: Record<string, string | undefined>
   ) => {
@@ -39,66 +39,62 @@ const App = () => {
     return queryString.toString();
   };
 
-  const saveJobHandler = async (newJob) => {
-    const res = await fetch("/api/jobs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newJob),
-    });
-    return;
+  const saveJobHandler = async (newJob: any) => {
+    try {
+      const res = await axiosInstance.post("/jobs", newJob);
+      return res.data;
+    } catch (error) {
+      setError({ code: error.response?.status, message: error.message });
+      throw error;
+    }
   };
 
-  // Delete Job
-  const deleteJob = async (id) => {
-    const res = await fetch(`/api/jobs/${id}`, {
-      method: "DELETE",
-    });
-    return;
+  const deleteJob = async (id: string) => {
+    try {
+      const res = await axiosInstance.delete(`/jobs/${id}`);
+      return res.data;
+    } catch (error) {
+      setError({ code: error.response?.status, message: error.message });
+      throw error;
+    }
   };
 
-  // Update Job
-  const updateJob = async (job) => {
-    const res = await fetch(`/api/jobs/${job.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(job),
-    });
-    return;
+  const updateJob = async (job: any) => {
+    try {
+      const res = await axiosInstance.put(`/jobs/${job.id}`, job);
+      return res.data;
+    } catch (error) {
+      setError({ code: error.response?.status, message: error.message });
+      throw error;
+    }
   };
 
-  // Update Job
   const searchJob = async (filters: {
     type: string;
     location: string;
     title: string;
   }) => {
     console.log(filters);
-
     try {
-      const url = `/api/jobs/search?${buildQueryParameters(filters)}`;
-      console.log(url);
-      const res = await fetch(url);
-      const data = await res.json();
-      return data;
+      const url = `/jobs/search?${buildQueryParameters(filters)}`;
+      const res = await axiosInstance.get(url);
+      return res.data;
     } catch (error) {
-      console.log("Error searching jobs ", error);
+      setError({ code: error.response?.status, message: error.message });
+      throw error;
     }
   };
 
   const fetchJobs = async () => {
-    const apiUrl = "api/jobs";
     try {
-      const res = await fetch(apiUrl);
-      const data = await res.json();
-      return data;
+      const res = await axiosInstance.get("/jobs");
+      return res.data;
     } catch (error) {
-      console.log("Error fetching jobs ", error);
+      setError({ code: error.response?.status, message: error.message });
+      throw error;
     }
   };
+
   const { user, loginWithRedirect, logout } = useAuth0();
   console.log("user is ", JSON.stringify(user, null, 2));
   const loginFxn = async () => {
@@ -110,6 +106,11 @@ const App = () => {
     console.log(window.location.origin);
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
+
+  if (error) {
+    return <ErrorPage errorCode={error.code} errorMessage={error.message} />;
+  }
+
   const RoutesJSX = (
     <Route
       path="/"
@@ -129,7 +130,15 @@ const App = () => {
         element={<JobSearchResults data={fetchJobs} />}
       />
       <Route path="callback" element={<Callback />} />
-      <Route path="*" element={<NotFound />} />
+      <Route
+        path="*"
+        element={
+          <ErrorPage
+            errorCode={404}
+            errorMessage="Page Not Found or Does Not Exists"
+          />
+        }
+      />
       <Route
         path="/jobs/:id"
         element={
@@ -155,8 +164,13 @@ const App = () => {
   );
 
   const router = createBrowserRouter(createRoutesFromElements(RoutesJSX));
-  return <RouterProvider router={router} />;
+  return (
+    <ErrorProvider>
+      <ErrorBoundary>
+        <RouterProvider router={router} />
+      </ErrorBoundary>
+    </ErrorProvider>
+  );
 };
-
 
 export default App;

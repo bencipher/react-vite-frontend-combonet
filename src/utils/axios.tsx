@@ -19,47 +19,44 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log("Remember to log this properly for ETL, axios error occured");
-    return Promise.reject(error);
+    // Log error for ETL
+    console.error("Error in request interceptor:", error);
+
+    // Throwing a new Response to be caught by ErrorBoundary
+    throw new Response("Error in request interceptor: " + error.message, {
+      status: 0,
+    });
   }
 );
 
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    const { setError } = useError();
-
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          setError({
-            code: 401,
-            message:
-              "Unauthorized: Access is denied due to invalid credentials.",
-          });
-          break;
+          throw new Response(
+            "Unauthorized: Access is denied due to invalid credentials.",
+            { status: 401 }
+          );
         case 404:
-          setError({
-            code: 404,
-            message: "Not Found: The requested resource could not be found.",
-          });
-          break;
+          throw new Response(
+            "Not Found: The requested resource could not be found.",
+            { status: 404 }
+          );
         case 500:
-          setError({
-            code: 500,
-            message: "Server Error: Something went wrong on the server.",
-          });
-          break;
+          throw new Response(
+            "Server Error: Something went wrong on the server.",
+            { status: 500 }
+          );
         default:
-          setError({ code: error.response.status, message: error.message });
+          throw new Response(error.message, { status: error.response.status });
       }
     } else {
-      setError({
-        code: 0,
-        message: "Network Error: Please check your connection.",
+      throw new Response("Network Error: Please check your connection.", {
+        status: 0,
       });
     }
-    return Promise.reject(error);
   }
 );
 

@@ -53,8 +53,9 @@ axiosInstance.interceptors.response.use(
           throw new Response(error.message, { status: error.response.status });
       }
     } else {
-      throw new Response("Network Error: Please check your connection.", {
-        status: 0,
+      console.log("couldn't fetch");
+      throw new Response("Network Error: technical issues from us inside ", {
+        status: 504,
       });
     }
   }

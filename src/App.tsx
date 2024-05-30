@@ -86,10 +86,10 @@ const App = () => {
       return res.data;
     } catch (error) {
       console.log("Got Error in Loader: ", JSON.stringify(error, null, 2));
-      // throw new Response(error.response?.data?.message || error.message, {
-      //   status: error.response?.status || 500,
-      // });
-      throw new Error("Network Error: technical issues from us");
+      throw new Response("", {
+        statusText: "Could not load jobs at all",
+        status: error.response?.status || 500,
+      });
     }
   };
 

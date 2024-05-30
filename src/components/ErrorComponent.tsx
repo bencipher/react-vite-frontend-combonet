@@ -3,12 +3,10 @@ import { FaExclamationTriangle } from "react-icons/fa";
 import { useRouteError } from "react-router-dom";
 interface ErrorProps {
   status: number;
-  message: string;
+  statusText: string;
 }
-const ErrorPage = () => {
-  console.log("here");
+const ErrorHandler = () => {
   const error: ErrorProps = useRouteError();
-  console.log("error found");
   let title, message;
   if (isRouteErrorResponse(error)) {
     title = "404 Not Found";
@@ -17,23 +15,28 @@ const ErrorPage = () => {
     switch (error.status) {
       case 400:
         title = "400 Bad Request";
-        message = "The request could not be understood by the server.";
+        message =
+          error.statusText ||
+          "The request could not be understood by the server.";
         break;
       case 401:
         title = "401 Unauthorized";
-        message = "You are not authorized to view this page.";
+        message =
+          error.statusText || "You are not authorized to view this page.";
         break;
       case 403:
         title = "403 Forbidden";
-        message = "You do not have permission to access this page.";
+        message =
+          error.statusText || "You do not have permission to access this page.";
         break;
       case 500:
         title = "500 Internal Server Error";
-        message = "An error occurred on the server.";
+        message = error.statusText || "An error occurred on the server.";
         break;
       default:
+        console.log("got here");
         title = `${error.status} Error`;
-        message = error.message || "An unexpected error occurred.";
+        message = error.statusText || "An unexpected error occurred.";
     }
   }
 
@@ -42,14 +45,14 @@ const ErrorPage = () => {
       <FaExclamationTriangle className="text-yellow-400 text-6xl mb-4" />
       <h1 className="text-6xl font-bold mb-4">{title}</h1>
       <p className="text-xl mb-5">{message}</p>
-      {/* <Link
+      <Link
         to="/"
         className="text-white bg-indigo-700 hover:bg-indigo-900 rounded-md px-3 py-2 mt-4"
       >
         Go Back
-      </Link> */}
+      </Link>
     </section>
   );
 };
 
-export default ErrorPage;
+export default ErrorHandler;

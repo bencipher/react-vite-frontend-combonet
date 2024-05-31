@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorPage from "../pages/ErrorPage";
+import ErrorHandler from "../components/ErrorComponent";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <ErrorPage
+        <ErrorHandler
           errorCode={500}
           errorMessage="An unexpected error occurred."
         />

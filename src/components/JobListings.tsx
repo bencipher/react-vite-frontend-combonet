@@ -14,10 +14,13 @@ const JobListings = ({ isHome = false, dataGetter = null }) => {
         const data = isHome
           ? responseData.slice(0, siteDefaults.homepageJobCount)
           : responseData;
-        // fi this to dynamically pass limit from config
         setJobs(data);
       } catch (error) {
         console.log("Error fetching jobs ", error);
+        throw new Response("", {
+          statusText: "Error fetching jobs from server",
+          status: 500,
+        });
       } finally {
         setLoading(false);
       }

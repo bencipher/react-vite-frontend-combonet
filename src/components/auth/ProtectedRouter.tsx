@@ -4,7 +4,7 @@ import React from "react";
 
 const ProtectedRoute = ({ element, ...args }) => {
   const { isAuthenticated } = useAuth0();
-
+  console.log("check if it is authenticated");
   const Component = withAuthenticationRequired(element, {
     onRedirecting: () => {
       if (!isAuthenticated) {

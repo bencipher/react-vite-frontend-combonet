@@ -130,19 +130,23 @@ const jobLoader = async ({ params }) => {
   const res = await fetch(`/api/jobs/${params.id}`);
 
   if (!res.ok) {
-    throw new Error(
-      `Error fetching job with ID ${params.id}: ${res.statusText}`
+    throw new Response(
+      `Error fetching job with ID ${params.id}: ${res.statusText}`,
+      { status: res.status }
     );
   }
 
   const data = await res.json();
 
   if (!data || Object.keys(data).length === 0) {
-    throw new Error(`Job with ID ${params.id} does not exist.`);
+    throw new Response(`Job with ID ${params.id} does not exist.`, {
+      status: 404,
+    });
   }
 
   return data;
 };
+
 
 
 export { JobDetailPage as default, jobLoader };

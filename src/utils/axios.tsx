@@ -32,32 +32,15 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response) {
-      switch (error.response.status) {
-        case 401:
-          throw new Response(
-            "Unauthorized: Access is denied due to invalid credentials.",
-            { status: 401 }
-          );
-        case 404:
-          throw new Response(
-            "Not Found: The requested resource could not be found.",
-            { status: 404 }
-          );
-        case 500:
-          throw new Response(
-            "Server Error: Something went wrong on the server.",
-            { status: 500 }
-          );
-        default:
-          throw new Response(error.message, { status: error.response.status });
-      }
-    } else {
-      console.log("couldn't fetch");
-      throw new Response("Network Error: technical issues from us inside ", {
-        status: 504,
-      });
+    console.log(JSON.stringify(error, null, 2));
+    let errorMessage = "Something unexpected happened";
+    if (error.message === "Network Error") {
+      errorMessage = "Could not connect to the server";
     }
+    throw new Response("Network Error: Unable to reach the server.", {
+      status: 500,
+      statusText: errorMessage,
+    });
   }
 );
 

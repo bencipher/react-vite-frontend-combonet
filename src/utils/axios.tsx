@@ -20,12 +20,8 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     // Log error for ETL
-    console.error("Error in request interceptor:", error);
-
-    // Throwing a new Response to be caught by ErrorBoundary
-    throw new Response("Error in request interceptor: " + error.message, {
-      status: 0,
-    });
+    console.error("Error in request interceptor: " + error.message, error);
+    throw new Error("Error while processing the request: ");
   }
 );
 
@@ -37,11 +33,7 @@ axiosInstance.interceptors.response.use(
     if (error.message === "Network Error") {
       errorMessage = "Could not connect to the server";
     }
-    throw new Response("Network Error: Unable to reach the server.", {
-      status: 500,
-      statusText: errorMessage,
-    });
+    throw new Error(errorMessage);
   }
 );
-
 export default axiosInstance;

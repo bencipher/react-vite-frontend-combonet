@@ -87,7 +87,6 @@ const App = () => {
             logout={logoutFxn}
           />
         }
-        // errorElement={<ErrorHandler />}
       >
         <Route index element={<HomePage data={fetchJobs} />} />
         <Route path="*" element={<NotFoundPage />} />
@@ -99,16 +98,11 @@ const App = () => {
         <Route path="callback" element={<Callback />} />
         <Route
           path="/jobs/:id"
-          element={<JobDetailPage deleteJob={deleteJob} />}
-          loader={jobLoader}
-        />
-        {/* <Route
-          path="/jobs/:id"
           element={
             <ProtectedRoute element={JobDetailPage} deleteJob={deleteJob} />
           }
           loader={jobLoader}
-        /> */}
+        />
         <Route
           path="add-job"
           element={
@@ -128,7 +122,7 @@ const App = () => {
   );
 
   const router = createBrowserRouter(createRoutesFromElements(RoutesJSX));
-  return <RouterProvider router={router} disableErrorBoundary={true} />;
+  return <RouterProvider router={router} />;
 };
 
 export default App;

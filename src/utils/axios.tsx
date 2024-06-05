@@ -28,12 +28,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.log(JSON.stringify(error, null, 2));
-    let errorMessage = "Something unexpected happened";
-    if (error.message === "Network Error") {
-      errorMessage = "Could not connect to the server";
-    }
-    throw new Error(errorMessage);
+    return Promise.reject(error);
   }
 );
 export default axiosInstance;

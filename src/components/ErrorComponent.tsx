@@ -4,8 +4,8 @@ import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
   let title, message;
-  console;
-  switch (error.status) {
+  const status = error.response?.status || error.request?.status;
+  switch (status) {
     case 400:
       title = "400 Bad Request";
       message =

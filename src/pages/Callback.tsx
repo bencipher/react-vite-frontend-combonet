@@ -21,9 +21,9 @@ const Callback = () => {
         // console.log("Nonce verification succeeded!", claims.nonce);
         const returnTo = sessionStorage.getItem("returnTo") || "/";
 
-        sessionStorage.removeItem("returnTo");
         const accessToken = await getAccessTokenSilently();
         localStorage.setItem("access_token", accessToken);
+        sessionStorage.removeItem("returnTo");
 
         setTimeout(() => {
           window.location.replace(returnTo);

@@ -3,7 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const EditJob = ({ updateJobSubmit }) => {
-  const job = useLoaderData();
+  const { job } = useLoaderData();
   const [title, setTitle] = useState(job.title);
   const [type, setType] = useState(job.type);
   const [location, setLocation] = useState(job.location);

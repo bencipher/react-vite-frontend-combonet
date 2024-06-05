@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import Job from "./Job";
 import Spinner from "./Spinner";
 import siteDefaults from "../config/siteDefaults.json";
+import { useErrorBoundary } from "react-error-boundary";
 
 const JobListings = ({ isHome = false, dataGetter = null }) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const { showBoundary } = useErrorBoundary();
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -17,10 +18,7 @@ const JobListings = ({ isHome = false, dataGetter = null }) => {
         setJobs(data);
       } catch (error) {
         console.log("Error fetching jobs ", error);
-        throw new Response("", {
-          statusText: "Error fetching jobs from server",
-          status: 500,
-        });
+        showBoundary(error);
       } finally {
         setLoading(false);
       }

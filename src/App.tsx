@@ -1,10 +1,12 @@
 import {
+  Outlet,
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import NotFoundPage from "./pages/NotFoundPage";
 import JobListing from "./pages/JobListingPage";
 import JobDetailPage, { jobLoader } from "./pages/JobDetailPage";
 import BaseLayout from "./layouts/BaseLayout";
@@ -33,128 +35,100 @@ const App = () => {
   };
 
   const saveJobHandler = async (newJob) => {
-    try {
-      const res = await axiosInstance.post("/jobs", newJob);
-      return res.data;
-    } catch (error) {
-      throw new Response(error.response?.data?.message || error.message, {
-        status: error.response?.status || 500,
-      });
-    }
+    const res = await axiosInstance.post("/jobs", newJob);
+    return res.data;
   };
 
   const deleteJob = async (id) => {
-    try {
-      const res = await axiosInstance.delete(`/jobs/${id}`);
-      return res.data;
-    } catch (error) {
-      throw new Response(error.response?.data?.message || error.message, {
-        status: error.response?.status || 500,
-      });
-    }
+    const res = await axiosInstance.delete(`/jobs/${id}`);
+    return res.data;
   };
 
   const updateJob = async (job) => {
-    try {
-      const res = await axiosInstance.put(`/jobs/${job.id}`, job);
-      return res.data;
-    } catch (error) {
-      throw new Response(error.response?.data?.message || error.message, {
-        status: error.response?.status || 500,
-      });
-    }
+    const res = await axiosInstance.put(`/jobs/${job.id}`, job);
+    return res.data;
   };
 
   const searchJob = async (filters) => {
     console.log(filters);
-    try {
-      const url = `/jobs/search?${buildQueryParameters(filters)}`;
-      const res = await axiosInstance.get(url);
-      return res.data;
-    } catch (error) {
-      throw new Response(error.response?.data?.message || error.message, {
-        status: error.response?.status || 500,
-      });
-    }
+    const url = `/jobs/search?${buildQueryParameters(filters)}`;
+    const res = await axiosInstance.get(url);
+    return res.data;
   };
 
   const fetchJobs = async () => {
-    try {
-      console.log("here");
-      const res = await axiosInstance.get("/jobs");
-      console.log(res.data);
-      return res.data;
-    } catch (error) {
-      console.log("Got Error in Loader: ", JSON.stringify(error, null, 2));
-      throw new Response("", {
-        statusText: "Could not load jobs at all",
-        status: error.response?.status || 500,
-      });
-    }
+    const res = await axiosInstance.get("/jobs");
+    return res.data;
   };
 
   const { user, loginWithRedirect, logout } = useAuth0();
-  console.log("user is ", JSON.stringify(user, null, 2));
   const loginFxn = async () => {
     loginWithRedirect();
   };
 
   const logoutFxn = () => {
-    console.log("is logout working");
-    console.log(window.location.origin);
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
+  const Root = () => (
+    <ErrorHandler>
+      <Outlet />
+    </ErrorHandler>
+  );
   const RoutesJSX = (
-    <Route
-      path="/"
-      element={
-        <BaseLayout
-          currentUser={user}
-          searchHandler={searchJob}
-          login={loginFxn}
-          logout={logoutFxn}
+    <Route path="/" element={<Root />}>
+      <Route
+        path="/"
+        element={
+          <BaseLayout
+            currentUser={user}
+            searchHandler={searchJob}
+            login={loginFxn}
+            logout={logoutFxn}
+          />
+        }
+        // errorElement={<ErrorHandler />}
+      >
+        <Route index element={<HomePage data={fetchJobs} />} />
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="jobs" element={<JobListing data={fetchJobs} />} />
+        <Route
+          path="jobs/search"
+          element={<JobSearchResults data={fetchJobs} />}
         />
-      }
-      errorElement={<ErrorHandler />}
-    >
-      <Route index element={<HomePage data={fetchJobs} />} />
-      <Route
-        path="jobs"
-        element={<JobListing data={fetchJobs} />}
-        errorElement={<ErrorHandler />}
-      />
-      <Route
-        path="jobs/search"
-        element={<JobSearchResults data={fetchJobs} />}
-      />
-      <Route path="callback" element={<Callback />} />
-      <Route
-        path="/jobs/:id"
-        element={
-          <ProtectedRoute element={JobDetailPage} deleteJob={deleteJob} />
-        }
-        loader={jobLoader}
-      />
-      <Route
-        path="add-job"
-        element={
-          <ProtectedRoute element={AddNewJob} addJobSubmit={saveJobHandler} />
-        }
-      />
+        <Route path="callback" element={<Callback />} />
+        <Route
+          path="/jobs/:id"
+          element={<JobDetailPage deleteJob={deleteJob} />}
+          loader={jobLoader}
+        />
+        {/* <Route
+          path="/jobs/:id"
+          element={
+            <ProtectedRoute element={JobDetailPage} deleteJob={deleteJob} />
+          }
+          loader={jobLoader}
+        /> */}
+        <Route
+          path="add-job"
+          element={
+            <ProtectedRoute element={AddNewJob} addJobSubmit={saveJobHandler} />
+          }
+        />
 
-      <Route
-        path="/jobs/edit/:id"
-        element={
-          <ProtectedRoute element={EditJob} updateJobSubmit={updateJob} />
-        }
-        loader={jobLoader}
-      />
+        <Route
+          path="/jobs/edit/:id"
+          element={
+            <ProtectedRoute element={EditJob} updateJobSubmit={updateJob} />
+          }
+          loader={jobLoader}
+        />
+      </Route>
     </Route>
   );
 
   const router = createBrowserRouter(createRoutesFromElements(RoutesJSX));
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} disableErrorBoundary={true} />;
 };
 
 export default App;

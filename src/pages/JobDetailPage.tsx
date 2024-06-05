@@ -2,39 +2,41 @@ import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useErrorBoundary } from "react-error-boundary";
+import { useEffect } from "react";
+import axiosInstance from "../utils/axios";
 
-console.log("About Rendering Job Detail Page");
 const JobDetailPage = ({ deleteJob }) => {
-  console.log("Should Render now");
-  const { id } = useParams();
-  const job = useLoaderData();
-  console.log(job);
-  if (job && Object.keys(job).length === 0) {
-    console.log("should raise 404 error");
+  const { showBoundary } = useErrorBoundary();
+  const { job, error } = useLoaderData();
+  if (error) {
+    showBoundary(error);
   }
+
   const navigate = useNavigate();
-  const onDeleteClick = (jobId) => {
+
+  const onDeleteClick = async (jobId) => {
     const confirm = window.confirm(
       "Are you sure you want to delete this listing?"
     );
 
     if (!confirm) return;
 
-    deleteJob(jobId);
-
-    toast.success("Job deleted successfully");
-
-    navigate("/jobs");
+    try {
+      await deleteJob(jobId);
+      toast.success("Job deleted successfully");
+      navigate("/jobs");
+    } catch (error) {
+      showBoundary(error);
+    }
   };
 
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-  // const [userMetadata, setUserMetadata] = useState(null);
+  const { isAuthenticated } = useAuth0();
 
-  // return (
-  //   <>
-  //     <h1>JOB DETAIL PAGE</h1>
-  //   </>
-  // );
+  if (!job) {
+    return null;
+  }
+
   return (
     <>
       {isAuthenticated && (
@@ -77,32 +79,21 @@ const JobDetailPage = ({ deleteJob }) => {
               </div>
             </main>
 
-            {/* <!-- Sidebar --> */}
             <aside>
-              {/* <!-- Company Info --> */}
               <div className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-bold mb-6">Company Info</h3>
-
                 <h2 className="text-2xl">{job.company.name}</h2>
-
                 <p className="my-2">{job.company.description}</p>
-
                 <hr className="my-4" />
-
                 <h3 className="text-xl">Contact Email:</h3>
-
                 <p className="my-2 bg-indigo-100 p-2 font-bold">
                   {job.company.contactEmail}
                 </p>
-
                 <h3 className="text-xl">Contact Phone:</h3>
-
                 <p className="my-2 bg-indigo-100 p-2 font-bold">
                   {job.company.contactPhone}
                 </p>
               </div>
-
-              {/* <!-- Manage --> */}
               <div className="bg-white p-6 rounded-lg shadow-md mt-6">
                 <h3 className="text-xl font-bold mb-6">Manage Job</h3>
                 <Link
@@ -127,24 +118,12 @@ const JobDetailPage = ({ deleteJob }) => {
 };
 
 const jobLoader = async ({ params }) => {
-  const res = await fetch(`/api/jobs/${params.id}`);
-
-  if (!res.ok) {
-    throw new Response(
-      `Error fetching job with ID ${params.id}: ${res.statusText}`,
-      { status: res.status }
-    );
+  try {
+    const res = await axiosInstance.get(`/jobs/${params.id}`);
+    return { job: res.data, error: null };
+  } catch (err) {
+    return { job: null, error: err };
   }
-
-  const data = await res.json();
-
-  if (!data || Object.keys(data).length === 0) {
-    throw new Response(`Job with ID ${params.id} does not exist.`, {
-      status: 404,
-    });
-  }
-
-  return data;
 };
 
 

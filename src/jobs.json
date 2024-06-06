@@ -41,6 +41,314 @@
         "contactEmail": "contact@consecteturadipisicing.com",
         "contactPhone": "555-555-5555"
       }
+    },
+    {
+      "id": "6",
+      "title": "Junior React Developer",
+      "type": "Internship",
+      "location": "New York, NY",
+      "description": "Internship opportunity for a Junior React Developer in our NYC office. Develop skills in React and contribute to our team's projects. Collaborate with experienced developers and learn from our expertise.",
+      "salary": "$40K - $50K",
+      "company": {
+        "name": "CodeForge",
+        "description": "CodeForge is a leading technology consulting firm specializing in React development. We offer a supportive work environment where interns can learn and grow alongside experienced developers.",
+        "contactEmail": "contact@codeforge.com",
+        "contactPhone": "555-555-5556"
+      }
+    },
+    {
+      "id": "7",
+      "title": "Front-End Engineer (Vue.js)",
+      "type": "Full-Time",
+      "location": "San Francisco, CA",
+      "description": "Interested in a new challenge? Join our team in San Francisco as a Front-End Engineer specializing in Vue.js. We are looking for an experienced developer with expertise in building scalable and performant web applications.",
+      "salary": "$80K - $90K",
+      "company": {
+        "name": "VueVision",
+        "description": "VueVision is a cutting-edge technology company creating innovative Vue.js applications. Join our team to contribute to groundbreaking projects and work with a world-class engineering team.",
+        "contactEmail": "contact@vuevision.com",
+        "contactPhone": "555-555-5557"
+      }
+    },
+    {
+      "id": "8",
+      "title": "Craftsman",
+      "type": "Full-Time",
+      "location": "New York, NY",
+      "description": "Looking for a skilled craftsman in NYC. We are looking for someone who can construct buildings and renovate properties. Please bring your own tools and be prepared to work hard.",
+      "salary": "$70K - $80K",
+      "company": {
+        "name": "Construction Co.",
+        "description": "We are a leading construction company based in NYC. We offer competitive compensation and a collaborative work environment where your skills are valued.",
+        "contactEmail": "contact@constructionco.com",
+        "contactPhone": "555-555-5558"
+      }
+    },
+    {
+      "id": "9",
+      "title": "Electrician",
+      "type": "Full-Time",
+      "location": "New York, NY",
+      "description": "We are hiring an electrician in NYC. The ideal candidate will have experience with wiring and electrical systems. Please bring your own safety gear and a willingness to learn.",
+      "salary": "$70K - $80K",
+      "company": {
+        "name": "Electrician Co.",
+        "description": "We are a leading electrical company based in NYC. We offer competitive compensation and a collaborative work environment where your skills are valued.",
+        "contactEmail": "contact@electricianco.com",
+        "contactPhone": "555-555-5559"
+      }
+    },
+    {
+      "id": "10",
+      "title": "Data Analyst",
+      "type": "Full-Time",
+      "location": "New York, NY",
+      "description": "We are hiring a data analyst in NYC. The ideal candidate will have strong analytical skills and experience with data visualization. Please bring your own laptop and a passion for data.",
+      "salary": "$70K - $80K",
+      "company": {
+        "name": "Data Analytics Co.",
+        "description": "We are a leading data analytics company based in NYC. We offer competitive compensation and a collaborative work environment where your skills are valued.",
+        "contactEmail": "contact@dataanalyticsco.com",
+        "contactPhone": "555-555-5550"
+      }
+    },
+    {
+      "id": "11",
+      "title": "UX Designer",
+      "type": "Full-Time",
+      "location": "New York, NY",
+      "description": "We are hiring a UX designer in NYC. The ideal candidate will have experience with user research and experience design. Please bring your own design software and a passion for human-centered design.",
+      "salary": "$70K - $80K",
+      "company": {
+        "name": "UX Design Co.",
+        "description": "We are a leading UX design company based in NYC. We offer competitive compensation and a collaborative work environment where your skills are valued.",
+        "contactEmail": "contact@uxdesignco.com",
+        "contactPhone": "555-555-5551"
+      }
+    },
+    {
+      "id": "12",
+      "title": "Senior Software Engineer",
+      "type": "Full-Time",
+      "location": "Austin, TX",
+      "description": "Join our team as a Senior Software Engineer in Austin, TX. We are looking for an individual with extensive experience in software development, particularly in Java and Spring Boot.",
+      "salary": "$110K - $130K",
+      "company": {
+        "name": "Tech Innovations",
+        "description": "Tech Innovations is a forward-thinking software company focused on developing cutting-edge applications. Our team thrives on creativity and innovation.",
+        "contactEmail": "contact@techinnovations.com",
+        "contactPhone": "555-555-5552"
+      }
+    },
+    {
+      "id": "13",
+      "title": "Product Manager",
+      "type": "Full-Time",
+      "location": "Boston, MA",
+      "description": "Seeking a Product Manager to lead our product team in Boston, MA. The ideal candidate will have experience in product development and a strong understanding of market trends.",
+      "salary": "$95K - $110K",
+      "company": {
+        "name": "Market Leaders",
+        "description": "Market Leaders is a top-tier company specializing in market analysis and product development. We offer a collaborative work environment and opportunities for growth.",
+        "contactEmail": "contact@marketleaders.com",
+        "contactPhone": "555-555-5553"
+      }
+    },
+    {
+      "id": "14",
+      "title": "Marketing Specialist",
+      "type": "Full-Time",
+      "location": "Seattle, WA",
+      "description": "We are looking for a Marketing Specialist in Seattle, WA. The ideal candidate will have experience in digital marketing and a passion for creating engaging content.",
+      "salary": "$60K - $75K",
+      "company": {
+        "name": "Digital Media Co.",
+        "description": "Digital Media Co. is a leading agency specializing in digital marketing and content creation. Join our team and help us deliver impactful campaigns.",
+        "contactEmail": "contact@digitalmediaco.com",
+        "contactPhone": "555-555-5554"
+      }
+    },
+    {
+      "id": "15",
+      "title": "HR Manager",
+      "type": "Full-Time",
+      "location": "Chicago, IL",
+      "description": "We are seeking an HR Manager for our Chicago office. The ideal candidate will have experience in human resources management and a strong understanding of employment laws.",
+      "salary": "$85K - $95K",
+      "company": {
+        "name": "People First",
+        "description": "People First is a consulting firm focused on HR solutions. We provide a supportive work environment and opportunities for professional development.",
+        "contactEmail": "contact@peoplefirst.com",
+        "contactPhone": "555-555-5555"
+      }
+    },
+    {
+      "id": "16",
+      "title": "Network Engineer",
+      "type": "Full-Time",
+      "location": "San Diego, CA",
+      "description": "Join our team as a Network Engineer in San Diego, CA. We are looking for an individual with experience in network design and troubleshooting.",
+      "salary": "$75K - $85K",
+      "company": {
+        "name": "NetWorks Inc.",
+        "description": "NetWorks Inc. is a technology company specializing in network solutions. Our team is dedicated to providing reliable and efficient networking services.",
+        "contactEmail": "contact@networksinc.com",
+        "contactPhone": "555-555-5556"
+      }
+    },
+    {
+      "id": "17",
+      "title": "Customer Support Specialist",
+      "type": "Full-Time",
+      "location": "Denver, CO",
+      "description": "We are hiring a Customer Support Specialist in Denver, CO. The ideal candidate will have excellent communication skills and a passion for helping customers.",
+      "salary": "$45K - $55K",
+      "company": {
+        "name": "Support Solutions",
+        "description": "Support Solutions is a customer service company dedicated to providing exceptional support to our clients. Join our team and make a difference.",
+        "contactEmail": "contact@supportsolutions.com",
+        "contactPhone": "555-555-5557"
+      }
+    },
+    {
+      "id": "18",
+      "title": "Content Writer",
+      "type": "Full-Time",
+      "location": "Portland, OR",
+      "description": "We are looking for a Content Writer in Portland, OR. The ideal candidate will have experience in content creation and a passion for storytelling.",
+      "salary": "$50K - $60K",
+      "company": {
+        "name": "Creative Words",
+        "description": "Creative Words is a content creation company focused on delivering engaging and impactful content. Join our team and help us tell compelling stories.",
+        "contactEmail": "contact@creativewords.com",
+        "contactPhone": "555-555-5558"
+      }
+    },
+    {
+      "id": "19",
+      "title": "Data Scientist",
+      "type": "Full-Time",
+      "location": "Los Angeles, CA",
+      "description": "We are seeking a Data Scientist in Los Angeles, CA. The ideal candidate will have experience in data analysis and machine learning.",
+      "salary": "$100K - $120K",
+      "company": {
+        "name": "Data Insights",
+        "description": "Data Insights is a company specializing in data analysis and insights. Join our team and help us turn data into actionable insights.",
+        "contactEmail": "contact@datainsights.com",
+        "contactPhone": "555-555-5559"
+      }
+    },
+    {
+      "id": "20",
+      "title": "Sales Representative",
+      "type": "Full-Time",
+      "location": "Phoenix, AZ",
+      "description": "We are hiring a Sales Representative in Phoenix, AZ. The ideal candidate will have experience in sales and a passion for building relationships with clients.",
+      "salary": "$50K - $70K",
+      "company": {
+        "name": "Sales Experts",
+        "description": "Sales Experts is a company focused on providing top-notch sales solutions. Join our team and help us drive sales and build strong client relationships.",
+        "contactEmail": "contact@salesexperts.com",
+        "contactPhone": "555-555-5560"
+      }
+    },
+    {
+      "id": "21",
+      "title": "Graphic Designer",
+      "type": "Full-Time",
+      "location": "San Jose, CA",
+      "description": "We are seeking a Graphic Designer in San Jose, CA. The ideal candidate will have experience in graphic design and a strong portfolio of work.",
+      "salary": "$60K - $75K",
+      "company": {
+        "name": "Design Studios",
+        "description": "Design Studios is a creative agency specializing in graphic design. Join our team and help us create visually stunning designs.",
+        "contactEmail": "contact@designstudios.com",
+        "contactPhone": "555-555-5561"
+      }
+    },
+    {
+      "id": "22",
+      "title": "Operations Manager",
+      "type": "Full-Time",
+      "location": "Las Vegas, NV",
+      "description": "We are hiring an Operations Manager in Las Vegas, NV. The ideal candidate will have experience in operations management and a strong understanding of business processes.",
+      "salary": "$85K - $95K",
+      "company": {
+        "name": "Operations Co.",
+        "description": "Operations Co. is a company focused on optimizing business operations. Join our team and help us streamline processes and improve efficiency.",
+        "contactEmail": "contact@operationsco.com",
+        "contactPhone": "555-555-5562"
+      }
+    },
+    {
+      "id": "23",
+      "title": "IT Support Technician",
+      "type": "Full-Time",
+      "location": "Salt Lake City, UT",
+      "description": "We are looking for an IT Support Technician in Salt Lake City, UT. The ideal candidate will have experience in IT support and a strong understanding of computer systems.",
+      "salary": "$55K - $65K",
+      "company": {
+        "name": "IT Solutions",
+        "description": "IT Solutions is a company providing top-notch IT support services. Join our team and help us deliver exceptional support to our clients.",
+        "contactEmail": "contact@itsolutions.com",
+        "contactPhone": "555-555-5563"
+      }
+    },
+    {
+      "id": "24",
+      "title": "Business Analyst",
+      "type": "Full-Time",
+      "location": "Nashville, TN",
+      "description": "Join our team as a Business Analyst in Nashville, TN. We are looking for an individual with strong analytical skills and experience in business analysis.",
+      "salary": "$70K - $80K",
+      "company": {
+        "name": "Business Insights",
+        "description": "Business Insights is a consulting firm specializing in business analysis. Join our team and help us deliver valuable insights to our clients.",
+        "contactEmail": "contact@businessinsights.com",
+        "contactPhone": "555-555-5564"
+      }
+    },
+    {
+      "id": "25",
+      "title": "Social Media Manager",
+      "type": "Full-Time",
+      "location": "Charlotte, NC",
+      "description": "We are hiring a Social Media Manager in Charlotte, NC. The ideal candidate will have experience in social media management and a passion for creating engaging content.",
+      "salary": "$50K - $65K",
+      "company": {
+        "name": "Social Media Co.",
+        "description": "Social Media Co. is a company focused on delivering top-notch social media management services. Join our team and help us grow our clients' social media presence.",
+        "contactEmail": "contact@socialmediaco.com",
+        "contactPhone": "555-555-5565"
+      }
+    },
+    {
+      "id": "26",
+      "title": "DevOps Engineer",
+      "type": "Full-Time",
+      "location": "Houston, TX",
+      "description": "We are seeking a DevOps Engineer in Houston, TX. The ideal candidate will have experience in DevOps practices and a strong understanding of cloud technologies.",
+      "salary": "$95K - $110K",
+      "company": {
+        "name": "Cloud Solutions",
+        "description": "Cloud Solutions is a company specializing in cloud technologies and DevOps practices. Join our team and help us deliver reliable and scalable solutions.",
+        "contactEmail": "contact@cloudsolutions.com",
+        "contactPhone": "555-555-5566"
+      }
+    },
+    {
+      "id": "27",
+      "title": "QA Tester",
+      "type": "Full-Time",
+      "location": "Orlando, FL",
+      "description": "We are hiring a QA Tester in Orlando, FL. The ideal candidate will have experience in software testing and a strong attention to detail.",
+      "salary": "$55K - $70K",
+      "company": {
+        "name": "Quality Assurance Co.",
+        "description": "Quality Assurance Co. is a company focused on delivering top-notch software testing services. Join our team and help us ensure the quality of our products.",
+        "contactEmail": "contact@qualityassuranceco.com",
+        "contactPhone": "555-555-5567"
+      }
     }
   ]
 }

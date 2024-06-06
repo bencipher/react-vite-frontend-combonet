@@ -1,57 +1,32 @@
 import React from "react";
-import logo from "../assets/images/logo.png";
-import { NavLink } from "react-router-dom";
 import navData from "../config/menu.json";
 import { NavigationLink } from "../models/menuModel";
 
 const { footer }: { footer: NavigationLink[] } = navData;
-console.log(footer);
-const Navbar = () => {
-  const linkClass = ({ isActive }) => {
-    let className =
-      "text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 w-full";
 
-    if (isActive) {
-      className += " bg-black";
-    }
-
-    return className;
-  };
-
+const Footer = () => {
   return (
-    <nav className="bg-black border-none">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-8">
-        <div className="flex h-30 items-center justify-between pt-5">
-          <div className="flex flex-col flex-1 items-center md:flex-row text-2xl">
-            {/* <!-- Logo --> */}
-            <span className="hidden md:block text-white text-center text-lg ml-2 mr-2 mb-2 hover:bg-slate-300">
-              Powered by
-            </span>
-            <NavLink
-              className="flex flex-shrink-0 items-center mr-4"
-              to="https://www.combonettechnology.com/"
-            >
-              <img className="h-10 w-auto" src={logo} alt="React Jobs" />
-            </NavLink>
-            <div className="md:ml-auto">
-              <div className="flex flex-col md:flex-row space-x-2">
-                {footer.map((item) => (
-                  <NavLink key={item.label} to={item.to} className={linkClass}>
-                    {item.label}
-                  </NavLink>
-                ))}
-              </div>
-            </div>
-            <div className="md:ml-auto">
-              <span className="hidden md:block text-white text-center text-lg ml-2">
-                Copyright © 2024 | All Rights Reserved
-              </span>
-            </div>
-          </div>
-        </div>
+    <footer className="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
+      <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+        <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          © {new Date().getFullYear()}{" "}
+          <a href="https://combonettechnology.com/" className="hover:underline">
+            JobFindr™
+          </a>
+          . All Rights Reserved.
+        </span>
+        <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+          {footer.map((item) => (
+            <li key={item.label}>
+              <a href={item.to} className="hover:underline me-4 md:me-6">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-    </nav>
+    </footer>
   );
 };
 
-export default Navbar;
+export default Footer;

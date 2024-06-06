@@ -3,135 +3,190 @@ import logo from "../assets/images/logo.png";
 import navData from "../config/menu.json";
 import { NavLink, useLocation } from "react-router-dom";
 import { NavigationLink } from "../models/menuModel";
+import { useAuth0 } from "@auth0/auth0-react";
+import { FaUserCircle } from "react-icons/fa";
 
 const { main }: { main: NavigationLink[] } = navData;
 
 const Navbar = () => {
-  const dropdownRef = useRef(null);
   const id = useId();
   const location = useLocation();
   const pathname = location.pathname;
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const { user } = useAuth0();
   const linkClass = ({ isActive }) =>
     isActive
-      ? "bg-black text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 nav-link inline-block lg:block"
-      : "text-black hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 nav-link inline-block lg:block";
+      ? "text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+      : "text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white";
 
   const toggleDropdown = () => {
     setIsDropdownVisible(!isDropdownVisible);
-    console.log("toggle is up ", isDropdownVisible);
   };
 
   return (
-    <nav className="bg-white border-b">
-      <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 py-4">
-        <div className="flex h-20 justify-between pt-2">
-          <div className="flex flex-1 items-center justify-between md:items-stretch">
-            <div className="order-0">
-              <NavLink
-                className="flex flex-shrink-0 items-center mr-4 md:ml-3 pt-2"
-                to="/"
-              >
-                <img className="h-10 w-auto" src={logo} alt="React Jobs" />
-              </NavLink>
+    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <NavLink
+          to="/"
+          className="flex items-center space-x-3 rtl:space-x-reverse"
+        >
+          <img src={logo} className="h-8" alt="React Jobs" />
+        </NavLink>
+        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <button
+            type="button"
+            className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="user-dropdown"
+            data-dropdown-placement="bottom"
+          >
+            <span className="sr-only">Open user menu</span>
+
+            {user ? (
+              <img
+                className="w-8 h-8 rounded-full"
+                src={user?.picture}
+                alt={`${user?.picture}'s photo`}
+              />
+            ) : (
+              <FaUserCircle className="w-8 h-8 rounded-full text-gray-400" />
+            )}
+          </button>
+          <div
+            className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+            id="user-dropdown"
+          >
+            <div className="px-4 py-3">
+              <span className="block text-sm text-gray-900 dark:text-white">
+                {user?.name}
+              </span>
+              <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                {user?.email}
+              </span>
             </div>
-            {/* <!-- navbar toggler --> */}
-            <input
-              id="nav-toggle"
-              onClick={toggleDropdown}
-              type="checkbox"
-              className="hidden"
-            />
-            <label
-              id="show-button"
-              htmlFor="nav-toggle"
-              className={`order-2 flex cursor-pointer items-center lg:order-1 lg:hidden`}
-            >
-              <svg className="h-6 fill-current" viewBox="0 0 20 20">
-                <title>Menu Open</title>
-                <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
-              </svg>
-            </label>
-            <label
-              id="hide-button"
-              htmlFor="nav-toggle"
-              className={`order-2 hidden cursor-pointer items-center lg:hidden lg:order-1`}
-            >
-              <svg className="h-6 fill-current" viewBox="0 0 20 20">
-                <title>Menu Close</title>
-                <polygon
-                  points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
-                  transform="rotate(45 10 10)"
-                ></polygon>
-              </svg>
-            </label>
-            <ul
-              id="nav-menu"
-              className=" navbar-nav order-3 w-full lg:order-1 lg:flex lg:w-auto lg:space-x-2 pt-2"
-            >
-              {main.map((menu) => (
-                <>
-                  {menu.hasChildren ? (
-                    <li
-                      key={menu.label}
-                      className=" group relative cursor-pointer pt-2 w-20"
-                      id="dropdown-button"
-                    >
-                      <span
-                        className={`pt-2 pl-2 md:pt-0 nav-link inline-flex items-center ${
-                          menu.children
-                            ?.map(({ to }) => to)
-                            .includes(pathname) ||
-                          menu.children
-                            ?.map(({ to }) => `${to}/`)
-                            .includes(pathname)
-                            ? "active"
-                            : ""
-                        }`}
-                      >
-                        {menu.label}
-                        <svg
-                          className="h-4 w-4 fill-current"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                      </span>
-                      <ul
-                        id="dropdown"
-                        className={`relative nav-dropdown-list mx-auto duration-300 lg:invisible lg:opacity-0 lg:block lg:h-auto lg:w-[11.5rem] 
-                        lg:group-hover:visible lg:group-hover:opacity-100 lg:left-[-99px] text-right text-white ${
-                          isDropdownVisible ? "" : "hidden"
-                        }`}
-                      >
-                        {menu.children?.map((child) => (
-                          <li className="nav-dropdown-item">
-                            <NavLink to={child.to} className={linkClass}>
-                              {child.label}
-                            </NavLink>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ) : (
-                    <li key={menu.label} className="nav-item">
-                      <NavLink className={linkClass} to={menu.to}>
-                        {menu.label}
-                      </NavLink>
-                    </li>
-                  )}
-                </>
-              ))}
-              <li className="nav-item mt-2 lg:hidden">
-                <NavLink
-                  className="btn btn-white btn-sm border-border"
-                  to="/contact"
+            <ul className="py-2" aria-labelledby="user-menu-button">
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
-                  Request a demo
-                </NavLink>
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Settings
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Earnings
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Sign out
+                </a>
               </li>
             </ul>
           </div>
+          <button
+            data-collapse-toggle="navbar-user"
+            type="button"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-user"
+            aria-expanded="false"
+            onClick={toggleDropdown}
+          >
+            <span className="sr-only">Open main menu</span>
+            <svg
+              className="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          className={`items-center justify-between ${
+            isDropdownVisible ? "" : "hidden"
+          } w-full md:flex md:w-auto md:order-1 pt-5`}
+          id="navbar-user"
+        >
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            {main.map((menu) =>
+              menu.hasChildren ? (
+                <li
+                  key={menu.label}
+                  className="group relative cursor-pointer w-20"
+                  id="dropdown-button"
+                >
+                  <span
+                    className={` pl-2 md:pt-0 nav-link inline-flex items-center ${
+                      menu.children?.map(({ to }) => to).includes(pathname) ||
+                      menu.children
+                        ?.map(({ to }) => `${to}/`)
+                        .includes(pathname)
+                        ? "active"
+                        : ""
+                    }`}
+                  >
+                    {menu.label}
+                    <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </span>
+                  <ul
+                    id="dropdown"
+                    className={`relative nav-dropdown-list mx-auto duration-300 lg:invisible lg:opacity-0 lg:block lg:h-auto lg:w-[11.5rem] lg:group-hover:visible lg:group-hover:opacity-100 lg:left-[-99px] text-right text-white ${
+                      isDropdownVisible ? "" : "hidden"
+                    }`}
+                  >
+                    {menu.children?.map((child) => (
+                      <li key={child.to} className="nav-dropdown-item">
+                        <NavLink to={child.to} className={linkClass}>
+                          {child.label}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ) : (
+                <li key={menu.label} className="nav-item">
+                  <NavLink className={linkClass} to={menu.to}>
+                    {menu.label}
+                  </NavLink>
+                </li>
+              )
+            )}
+            <li className="nav-item lg:hidden">
+              <NavLink
+                className="btn btn-white btn-sm border-border"
+                to="/contact"
+              >
+                Request a demo
+              </NavLink>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>

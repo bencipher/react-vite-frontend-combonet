@@ -1,7 +1,5 @@
-// src/utils/axios.js
 import axios from "axios";
-import { useError } from "../errors/ErrorContext";
-console.log(import.meta.env.VITE_BACKEND_URL);
+
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
   headers: {

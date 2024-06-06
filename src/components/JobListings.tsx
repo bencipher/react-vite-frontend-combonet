@@ -8,13 +8,17 @@ const JobListings = ({ isHome = false, dataGetter = null }) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const { showBoundary } = useErrorBoundary();
+  const [currentPage, setCurrentPage] = useState(1);
+  const lastPostIndex = currentPage * siteDefaults.jobsPerPage;
+  const firstPostIndex = lastPostIndex - siteDefaults.jobsPerPage;
   useEffect(() => {
     const fetchJobs = async () => {
       try {
         const responseData = await dataGetter();
+
         const data = isHome
           ? responseData.slice(0, siteDefaults.homepageJobCount)
-          : responseData;
+          : responseData.slice(firstPostIndex, lastPostIndex);
         setJobs(data);
       } catch (error) {
         console.log("Error fetching jobs ", error);

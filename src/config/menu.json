@@ -15,22 +15,6 @@
     {
       "label": "Blog & Articles",
       "to": "/blogs"
-    },
-    {
-      "label": "Pages",
-      "to": "",
-      "hasChildren": true,
-      "children": [
-        {
-          "label": "Career",
-          "to": "/career"
-        },
-
-        {
-          "label": "Integrations",
-          "to": "/integrations"
-        }
-      ]
     }
   ],
 

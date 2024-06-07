@@ -36,7 +36,7 @@ const ProfileButtonNav = ({ user, onLogin, onLogout, toggleDropdown }) => {
       <div
         className={`z-50 ${
           isUserProfileVisible
-            ? "absolute transform translate-x-[-88px] translate-y-[125px]"
+            ? "absolute transform lg:translate-x-[-58px] lg:translate-y-[125px] translate-x-[-45px] translate-y-[130px]"
             : "hidden"
         } my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
         id="user-dropdown"
@@ -45,9 +45,9 @@ const ProfileButtonNav = ({ user, onLogin, onLogout, toggleDropdown }) => {
           <span className="block text-sm text-gray-900 dark:text-white">
             {user?.name}
           </span>
-          {/* <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+          <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
             {user?.email}
-          </span> */}
+          </span>
         </div>
         <ul className="py-2" aria-labelledby="user-menu-button">
           <li>

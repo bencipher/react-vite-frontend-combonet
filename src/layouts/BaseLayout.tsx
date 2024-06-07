@@ -11,7 +11,7 @@ const BaseLayout = ({ currentUser, searchHandler, login, logout }) => {
   return (
     <>
       <BeltComponent user={currentUser} onLogin={login} onLogout={logout} />
-      <Navbar />
+      <Navbar onLogin={login} onLogout={logout} />
       <Outlet />
       <SearchBar searchFunction={searchHandler} />
       <Footer />

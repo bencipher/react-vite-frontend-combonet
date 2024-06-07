@@ -6,12 +6,14 @@ export default {
       fontFamily: {
         sans: ['Roboto', 'sans-serif'],
       },
+      translate: {
+        'custom-x': '727px',
+        'custom-y': '58px',
+      },
       gridTemplateColumns: {
-        //add cutom class later
-        '70/30': '70% 28%',
+        '70/30': '70% 30%',
       },
     },
   },
-plugins: [require ('flowbite/plugin')],
-
+  plugins: [require('flowbite/plugin')],
 };

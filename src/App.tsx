@@ -67,6 +67,7 @@ const App = () => {
   };
 
   const logoutFxn = () => {
+    console.log("called from the profile nav");
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
 

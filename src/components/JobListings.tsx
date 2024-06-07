@@ -50,12 +50,14 @@ const JobListings = ({ isHome = false, dataGetter = null }) => {
             </div>
           )}
         </div>
-        <Pagination
-          setCurrentPage={setCurrentPage}
-          totalPosts={jobs.length}
-          postsPerPage={siteDefaults.jobsPerPage}
-          currentPage={currentPage}
-        />
+        {!isHome && (
+          <Pagination
+            setCurrentPage={setCurrentPage}
+            totalPosts={jobs.length}
+            postsPerPage={siteDefaults.jobsPerPage}
+            currentPage={currentPage}
+          />
+        )}
       </section>
     </>
   );

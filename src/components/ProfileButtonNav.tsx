@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
@@ -6,9 +6,23 @@ const ProfileButtonNav = ({ user, onLogin, onLogout, toggleDropdown }) => {
   const [isUserProfileVisible, setIsUserProfileVisible] = useState(false);
 
   const toggleUserProfileDropdown = () => {
-    console.log("should toggle user dropdown ", isUserProfileVisible);
     setIsUserProfileVisible(!isUserProfileVisible);
   };
+
+  const dropdownRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsUserProfileVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button
@@ -34,6 +48,7 @@ const ProfileButtonNav = ({ user, onLogin, onLogout, toggleDropdown }) => {
       </button>
 
       <div
+        ref={dropdownRef}
         className={`z-50 ${
           isUserProfileVisible
             ? "absolute transform lg:translate-x-[-58px] lg:translate-y-[125px] translate-x-[-45px] translate-y-[130px]"

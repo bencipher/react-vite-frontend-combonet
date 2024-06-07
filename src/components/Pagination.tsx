@@ -11,6 +11,9 @@ const Pagination = ({
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pages.push(i);
   }
+
+  const startIndex = Math.max(0, Math.min(pages.length - 5, currentPage - 3));
+  const visiblePages = pages.slice(startIndex, startIndex + 5);
   console.log(pages);
   const classStyles =
     "flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white";
@@ -28,7 +31,7 @@ const Pagination = ({
               </a>
             </li>
           )}
-          {pages.map((page, index) => {
+          {visiblePages.map((page, index) => {
             return (
               <li key={index}>
                 <a

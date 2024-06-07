@@ -197,6 +197,62 @@
       }
     },
     {
+      "id": "21",
+      "title": "Graphic Designer",
+      "type": "Full-Time",
+      "location": "San Jose, CA",
+      "description": "We are seeking a Graphic Designer in San Jose, CA. The ideal candidate will have experience in graphic design and a strong portfolio of work.",
+      "salary": "$60K - $75K",
+      "company": {
+        "name": "Design Studios",
+        "description": "Design Studios is a creative agency specializing in graphic design. Join our team and help us create visually stunning designs.",
+        "contactEmail": "contact@designstudios.com",
+        "contactPhone": "555-555-5561"
+      }
+    },
+    {
+      "id": "22",
+      "title": "Operations Manager",
+      "type": "Full-Time",
+      "location": "Las Vegas, NV",
+      "description": "We are hiring an Operations Manager in Las Vegas, NV. The ideal candidate will have experience in operations management and a strong understanding of business processes.",
+      "salary": "$85K - $95K",
+      "company": {
+        "name": "Operations Co.",
+        "description": "Operations Co. is a company focused on optimizing business operations. Join our team and help us streamline processes and improve efficiency.",
+        "contactEmail": "contact@operationsco.com",
+        "contactPhone": "555-555-5562"
+      }
+    },
+    {
+      "id": "23",
+      "title": "IT Support Technician",
+      "type": "Full-Time",
+      "location": "Salt Lake City, UT",
+      "description": "We are looking for an IT Support Technician in Salt Lake City, UT. The ideal candidate will have experience in IT support and a strong understanding of computer systems.",
+      "salary": "$55K - $65K",
+      "company": {
+        "name": "IT Solutions",
+        "description": "IT Solutions is a company providing top-notch IT support services. Join our team and help us deliver exceptional support to our clients.",
+        "contactEmail": "contact@itsolutions.com",
+        "contactPhone": "555-555-5563"
+      }
+    },
+    {
+      "id": "24",
+      "title": "Business Analyst",
+      "type": "Full-Time",
+      "location": "Nashville, TN",
+      "description": "Join our team as a Business Analyst in Nashville, TN. We are looking for an individual with strong analytical skills and experience in business analysis.",
+      "salary": "$70K - $80K",
+      "company": {
+        "name": "Business Insights",
+        "description": "Business Insights is a consulting firm specializing in business analysis. Join our team and help us deliver valuable insights to our clients.",
+        "contactEmail": "contact@businessinsights.com",
+        "contactPhone": "555-555-5564"
+      }
+    },
+    {
       "id": "17",
       "title": "Customer Support Specialist",
       "type": "Full-Time",
@@ -334,6 +390,62 @@
         "description": "Cloud Solutions is a company specializing in cloud technologies and DevOps practices. Join our team and help us deliver reliable and scalable solutions.",
         "contactEmail": "contact@cloudsolutions.com",
         "contactPhone": "555-555-5566"
+      }
+    },
+    {
+      "id": "21",
+      "title": "Graphic Designer",
+      "type": "Full-Time",
+      "location": "San Jose, CA",
+      "description": "We are seeking a Graphic Designer in San Jose, CA. The ideal candidate will have experience in graphic design and a strong portfolio of work.",
+      "salary": "$60K - $75K",
+      "company": {
+        "name": "Design Studios",
+        "description": "Design Studios is a creative agency specializing in graphic design. Join our team and help us create visually stunning designs.",
+        "contactEmail": "contact@designstudios.com",
+        "contactPhone": "555-555-5561"
+      }
+    },
+    {
+      "id": "22",
+      "title": "Operations Manager",
+      "type": "Full-Time",
+      "location": "Las Vegas, NV",
+      "description": "We are hiring an Operations Manager in Las Vegas, NV. The ideal candidate will have experience in operations management and a strong understanding of business processes.",
+      "salary": "$85K - $95K",
+      "company": {
+        "name": "Operations Co.",
+        "description": "Operations Co. is a company focused on optimizing business operations. Join our team and help us streamline processes and improve efficiency.",
+        "contactEmail": "contact@operationsco.com",
+        "contactPhone": "555-555-5562"
+      }
+    },
+    {
+      "id": "23",
+      "title": "IT Support Technician",
+      "type": "Full-Time",
+      "location": "Salt Lake City, UT",
+      "description": "We are looking for an IT Support Technician in Salt Lake City, UT. The ideal candidate will have experience in IT support and a strong understanding of computer systems.",
+      "salary": "$55K - $65K",
+      "company": {
+        "name": "IT Solutions",
+        "description": "IT Solutions is a company providing top-notch IT support services. Join our team and help us deliver exceptional support to our clients.",
+        "contactEmail": "contact@itsolutions.com",
+        "contactPhone": "555-555-5563"
+      }
+    },
+    {
+      "id": "24",
+      "title": "Business Analyst",
+      "type": "Full-Time",
+      "location": "Nashville, TN",
+      "description": "Join our team as a Business Analyst in Nashville, TN. We are looking for an individual with strong analytical skills and experience in business analysis.",
+      "salary": "$70K - $80K",
+      "company": {
+        "name": "Business Insights",
+        "description": "Business Insights is a consulting firm specializing in business analysis. Join our team and help us deliver valuable insights to our clients.",
+        "contactEmail": "contact@businessinsights.com",
+        "contactPhone": "555-555-5564"
       }
     },
     {

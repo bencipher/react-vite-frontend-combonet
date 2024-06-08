@@ -1,8 +1,16 @@
+import React from "react";
 import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
 import { PageLoader } from "../page-loader";
-import React from "react";
 
-const ProtectedRoute = ({ element, ...args }) => {
+interface ProtectedRouteProps {
+  element: React.ComponentType<any>;
+  [key: string]: any;
+}
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
+  element,
+  ...args
+}) => {
   const { isAuthenticated } = useAuth0();
   const Component = withAuthenticationRequired(element, {
     onRedirecting: () => {

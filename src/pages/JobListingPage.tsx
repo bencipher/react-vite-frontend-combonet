@@ -1,7 +1,6 @@
-import React from "react";
 import JobListings from "../components/JobListings";
 
-const JobListing = ({ data }) => {
+const JobListing = ({ data }: any) => {
   return <JobListings dataGetter={data} />;
 };
 

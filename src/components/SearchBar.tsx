@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import Card from "./Card";
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
-const SearchBar = ({ searchFunction }) => {
+const SearchBar = ({ searchFunction }: any) => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Remote");
   const [location, setLocation] = useState("");
-  const submitForm = (e) => {
+  const submitForm = (e: any) => {
     e.preventDefault();
     const filterParams = {
       title,

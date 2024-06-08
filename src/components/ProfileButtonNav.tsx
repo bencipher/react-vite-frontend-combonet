@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const ProfileButtonNav = ({ user, onLogin, onLogout, toggleDropdown }) => {
+const ProfileButtonNav = ({ user, onLogin, onLogout, toggleDropdown }: any) => {
   const [isUserProfileVisible, setIsUserProfileVisible] = useState(false);
 
   const toggleUserProfileDropdown = () => {
     setIsUserProfileVisible(!isUserProfileVisible);
   };
 
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (event: any) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsUserProfileVisible(false);
     }
@@ -66,24 +66,39 @@ const ProfileButtonNav = ({ user, onLogin, onLogout, toggleDropdown }) => {
         </div>
         <ul className="py-2" aria-labelledby="user-menu-button">
           <li>
-            <NavLink
+            <Link
               to="/dashboard"
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
             >
               Dashboard
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink
+            <Link
               to="/add-job"
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
             >
               Add Jobs
-            </NavLink>
+            </Link>
           </li>
 
           <li>
-            <NavLink
+            <Link
+              to="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+              onClick={(event) => {
+                event.preventDefault();
+                console.log("clicking here " + (user ? "logout" : "login"));
+                if (user) {
+                  onLogout();
+                } else {
+                  onLogin();
+                }
+              }}
+            >
+              {user ? "Sign out" : "Sign in"}
+            </Link>
+            {/* <NavLink
               onClick={() => {
                 console.log("clicking " + (user ? "logout" : "login"));
                 user ? onLogout : onLogin;
@@ -92,7 +107,7 @@ const ProfileButtonNav = ({ user, onLogin, onLogout, toggleDropdown }) => {
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
             >
               {user ? "Sign out" : "Sign in"}
-            </NavLink>
+            </NavLink> */}
           </li>
         </ul>
       </div>

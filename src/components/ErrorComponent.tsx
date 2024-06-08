@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { FaExclamationTriangle } from "react-icons/fa";
-import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
+import { ErrorBoundary } from "react-error-boundary";
 
-const ErrorFallback = ({ error, resetErrorBoundary }) => {
+const ErrorFallback = ({ error, resetErrorBoundary }: any) => {
   let title, message;
   const status = error.response?.status || error.request?.status;
   switch (status) {
@@ -56,7 +56,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
   );
 };
 
-const ErrorHandler = ({ children }) => (
+const ErrorHandler = ({ children }: any) => (
   <ErrorBoundary FallbackComponent={ErrorFallback}>{children}</ErrorBoundary>
 );
 

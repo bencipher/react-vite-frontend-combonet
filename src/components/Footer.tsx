@@ -1,4 +1,3 @@
-import React from "react";
 import navData from "../config/menu.json";
 import { NavigationLink } from "../models/menuModel";
 

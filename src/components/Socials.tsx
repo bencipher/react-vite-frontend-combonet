@@ -1,4 +1,3 @@
-import React from "react";
 import { FaFacebook } from "react-icons/fa";
 import socialLinks from "../config/social.json";
 import {

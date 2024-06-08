@@ -9,7 +9,7 @@ export const Auth0ProviderWithNavigate = ({
 }: Auth0ProviderWithNavigateProps) => {
   const domain = import.meta.env.VITE_AUTH0_DOMAIN;
   const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
-  const onRedirectCallback = (appState: AppState) => {
+  const onRedirectCallback = () => {
     window.location.replace(import.meta.env.VITE_AUTH0_CALLBACK_URL);
   };
 

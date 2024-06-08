@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
-import Job from "./Job";
+import Job, { JobType } from "./Job";
 import Spinner from "./Spinner";
 import siteDefaults from "../config/siteDefaults.json";
 import { useErrorBoundary } from "react-error-boundary";
 import Pagination from "./Pagination";
 
-const JobListings = ({ isHome = false, dataGetter = null }) => {
-  const [jobs, setJobs] = useState([]);
+interface JobListingsProps {
+  isHome?: boolean;
+  dataGetter: () => Promise<JobType[]>;
+}
+
+const JobListings = ({ isHome = false, dataGetter }: JobListingsProps) => {
+  console.log(isHome, dataGetter);
+  const [jobs, setJobs] = useState<JobType[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const { showBoundary } = useErrorBoundary();
@@ -24,15 +30,14 @@ const JobListings = ({ isHome = false, dataGetter = null }) => {
       }
     };
     fetchJobs();
-  }, []);
+  }, [dataGetter, showBoundary]);
+
   const lastPostIndex = currentPage * siteDefaults.jobsPerPage;
   const firstPostIndex = lastPostIndex - siteDefaults.jobsPerPage;
   const data = isHome
     ? jobs.slice(0, siteDefaults.homepageJobCount)
     : jobs.slice(firstPostIndex, lastPostIndex);
-  console.log("current page is ", currentPage);
 
-  console.log("Job length is ", jobs.length);
   return (
     <>
       <section className="bg-blue-50 px-4 py-10">

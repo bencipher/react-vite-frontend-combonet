@@ -27,29 +27,29 @@ const App = () => {
 
     for (const key in filters) {
       if (filters[key]) {
-        queryString.append(key, filters[key]);
+        queryString.append(key, filters[key] as string);
       }
     }
 
     return queryString.toString();
   };
 
-  const saveJobHandler = async (newJob) => {
+  const saveJobHandler = async (newJob: any) => {
     const res = await axiosInstance.post("/jobs", newJob);
     return res.data;
   };
 
-  const deleteJob = async (id) => {
+  const deleteJob = async (id: string) => {
     const res = await axiosInstance.delete(`/jobs/${id}`);
     return res.data;
   };
 
-  const updateJob = async (job) => {
+  const updateJob = async (job: any) => {
     const res = await axiosInstance.put(`/jobs/${job.id}`, job);
     return res.data;
   };
 
-  const searchJob = async (filters) => {
+  const searchJob = async (filters: Record<string, string | undefined>) => {
     console.log(filters);
     const url = `/jobs/search?${buildQueryParameters(filters)}`;
     const res = await axiosInstance.get(url);
@@ -58,11 +58,13 @@ const App = () => {
 
   const fetchJobs = async () => {
     const res = await axiosInstance.get("/jobs");
+    console.log(res.data);
     return res.data;
   };
 
   const { user, loginWithRedirect, logout } = useAuth0();
   const loginFxn = async () => {
+    console.log("in main log in");
     loginWithRedirect();
   };
 
@@ -76,6 +78,7 @@ const App = () => {
       <Outlet />
     </ErrorHandler>
   );
+
   const RoutesJSX = (
     <Route path="/" element={<Root />}>
       <Route
@@ -110,7 +113,6 @@ const App = () => {
             <ProtectedRoute element={AddNewJob} addJobSubmit={saveJobHandler} />
           }
         />
-
         <Route
           path="/jobs/edit/:id"
           element={

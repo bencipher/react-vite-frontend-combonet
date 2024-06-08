@@ -1,21 +1,20 @@
-import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useErrorBoundary } from "react-error-boundary";
-import { useEffect } from "react";
 import axiosInstance from "../utils/axios";
 
-const JobDetailPage = ({ deleteJob }) => {
+const JobDetailPage = ({ deleteJob }: any) => {
   const { showBoundary } = useErrorBoundary();
-  const { job, error } = useLoaderData();
+  const { job, error }: any = useLoaderData();
   if (error) {
     showBoundary(error);
   }
 
   const navigate = useNavigate();
 
-  const onDeleteClick = async (jobId) => {
+  const onDeleteClick = async (jobId: string) => {
     const confirm = window.confirm(
       "Are you sure you want to delete this listing?"
     );
@@ -117,7 +116,7 @@ const JobDetailPage = ({ deleteJob }) => {
   );
 };
 
-const jobLoader = async ({ params }) => {
+const jobLoader = async ({ params }: any) => {
   try {
     const res = await axiosInstance.get(`/jobs/${params.id}`);
     return { job: res.data, error: null };
@@ -125,7 +124,5 @@ const jobLoader = async ({ params }) => {
     return { job: null, error: err };
   }
 };
-
-
 
 export { JobDetailPage as default, jobLoader };

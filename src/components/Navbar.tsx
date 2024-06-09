@@ -3,22 +3,16 @@ import logo from "../assets/images/logo.png";
 import navData from "../config/menu.json";
 import { NavLink, useLocation } from "react-router-dom";
 import { NavigationLink } from "../models/menuModel";
-import { useAuth0 } from "@auth0/auth0-react";
 import ProfileButtonNav from "./ProfileButtonNav";
+import { useAuthHandler } from "../contexts/AuthHandlerContext";
 
 const { main }: { main: NavigationLink[] } = navData;
 
-const Navbar = ({
-  onLogin,
-  onLogout,
-}: {
-  onLogin: () => void;
-  onLogout: () => void;
-}) => {
+const Navbar = () => {
+  const { user, logout, login } = useAuthHandler();
   const location = useLocation();
   const pathname = location.pathname;
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const { user } = useAuth0();
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     isActive
       ? "text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
@@ -38,8 +32,8 @@ const Navbar = ({
         </NavLink>
         <ProfileButtonNav
           user={user}
-          onLogin={onLogin}
-          onLogout={onLogout}
+          onLogin={login}
+          onLogout={logout}
           toggleDropdown={toggleDropdown}
         />
         <div

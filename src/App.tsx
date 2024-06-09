@@ -63,17 +63,6 @@ const App = () => {
     return res.data;
   };
 
-  const { user, loginWithRedirect, logout } = useAuth0();
-  const loginFxn = async () => {
-    console.log("in main log in");
-    loginWithRedirect();
-  };
-
-  const logoutFxn = () => {
-    console.log("called from the profile nav");
-    logout({ logoutParams: { returnTo: window.location.origin } });
-  };
-
   const Root = () => (
     <ErrorHandler>
       <Outlet />
@@ -82,17 +71,7 @@ const App = () => {
 
   const RoutesJSX = (
     <Route path="/" element={<Root />}>
-      <Route
-        path="/"
-        element={
-          <BaseLayout
-            currentUser={user}
-            searchHandler={searchJob}
-            login={loginFxn}
-            logout={logoutFxn}
-          />
-        }
-      >
+      <Route path="/" element={<BaseLayout searchHandler={searchJob} />}>
         <Route index element={<HomePage data={fetchJobs} />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route path="jobs" element={<JobListing data={fetchJobs} />} />
@@ -131,10 +110,7 @@ const App = () => {
       <RouterProvider router={router} />
     </AuthHandlerProvider>
   );
-  // return <RouterProvider router={router} />;
 };
 
-// (<AuthHandlerProvider.Provider value={login: loginFxn, logout: logoutFxn}>
-//   //    </AuthHandlerProvider.Provider>);
 
 export default App;

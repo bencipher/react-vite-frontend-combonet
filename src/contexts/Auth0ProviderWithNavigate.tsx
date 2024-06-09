@@ -1,5 +1,5 @@
 import { Auth0Provider } from "@auth0/auth0-react";
-import { randomBytes } from "./utils/auth";
+import { randomBytes } from "../utils/auth";
 
 interface Auth0ProviderWithNavigateProps {
   children: React.ReactNode;

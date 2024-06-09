@@ -6,9 +6,10 @@ const HomeCards = () => {
       <div className="container-xl lg:container m-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
           <Card>
-            <h2 className="text-2xl font-bold">For Developers</h2>
+            <h2 className="text-2xl font-bold">For Applicants</h2>
             <p className="mt-2 mb-4">
-              Browse our React jobs and start your career today
+              Browse our AI filtered jobs tailored for you and start your career
+              today
             </p>
             <a
               href="/jobs"
@@ -18,9 +19,10 @@ const HomeCards = () => {
             </a>
           </Card>
           <Card extraStyle="bg-indigo-100">
-            <h2 className="text-2xl font-bold">For Employers</h2>
+            <h2 className="text-2xl font-bold">For Recruiters</h2>
             <p className="mt-2 mb-4">
-              List your job to find the perfect developer for the role
+              List your job opportunities to find the perfect professional for
+              the role
             </p>
             <a
               href="/add-job"

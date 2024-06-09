@@ -9,12 +9,16 @@
       "to": "/jobs"
     },
     {
-      "label": "Add Job",
-      "to": "/add-job"
+      "label": "Free CV Review",
+      "to": "/reiew-cv"
     },
     {
       "label": "Blog & Articles",
       "to": "/blogs"
+    },
+    {
+      "label": "About Us",
+      "to": "/about"
     }
   ],
 
@@ -34,6 +38,10 @@
     {
       "label": "Sitemap",
       "to": "/sitemap"
+    },
+    {
+      "label": "Join Us",
+      "to": "/vacancies"
     }
   ]
 }

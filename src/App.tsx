@@ -1,4 +1,3 @@
-import { createContext } from "react";
 import {
   Outlet,
   Route,
@@ -14,7 +13,6 @@ import BaseLayout from "./layouts/BaseLayout";
 import AddNewJob from "./pages/AddNewJobPage";
 import EditJob from "./pages/EditJobPage";
 import JobSearchResults from "./pages/JobSearchPage";
-import { useAuth0 } from "@auth0/auth0-react";
 import ProtectedRoute from "./components/auth/ProtectedRouter";
 import Callback from "./pages/Callback";
 import axiosInstance from "./utils/axios";
@@ -111,6 +109,5 @@ const App = () => {
     </AuthHandlerProvider>
   );
 };
-
 
 export default App;

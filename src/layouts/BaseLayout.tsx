@@ -7,7 +7,7 @@ import SearchBar from "../components/SearchBar";
 import Footer from "../components/Footer";
 import BeltComponent from "../components/BeltComponent";
 
-const BaseLayout = ({ searchHandler, login, logout }: any) => {
+const BaseLayout = ({ searchHandler }: any) => {
   return (
     <>
       <BeltComponent />

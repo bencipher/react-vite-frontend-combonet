@@ -21,7 +21,7 @@ const AuthHandlerContext = createContext<AuthHandlerContextProps | undefined>(
 export const AuthHandlerProvider = ({ children }: { children: ReactNode }) => {
   const { loginWithRedirect, logout, user, getAccessTokenSilently } =
     useAuth0();
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState("");
 
   const login = async () => {
     loginWithRedirect();

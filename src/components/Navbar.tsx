@@ -4,12 +4,10 @@ import navData from "../config/menu.json";
 import { NavLink, useLocation } from "react-router-dom";
 import { NavigationLink } from "../models/menuModel";
 import ProfileButtonNav from "./ProfileButtonNav";
-import { useAuthHandler } from "../contexts/AuthHandlerContext";
 
 const { main }: { main: NavigationLink[] } = navData;
 
 const Navbar = () => {
-  const { user, logout, login } = useAuthHandler();
   const location = useLocation();
   const pathname = location.pathname;
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -30,12 +28,7 @@ const Navbar = () => {
         >
           <img src={logo} className="h-8" alt="React Jobs" />
         </NavLink>
-        <ProfileButtonNav
-          user={user}
-          onLogin={login}
-          onLogout={logout}
-          toggleDropdown={toggleDropdown}
-        />
+        <ProfileButtonNav toggleDropdown={toggleDropdown} />
         <div
           className={`items-center justify-between ${
             isDropdownVisible ? "" : "hidden"

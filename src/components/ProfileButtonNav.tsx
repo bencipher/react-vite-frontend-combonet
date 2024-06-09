@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useAuthHandler } from "../contexts/AuthHandlerContext";
 
-const ProfileButtonNav = ({ user, onLogin, onLogout, toggleDropdown }: any) => {
+const ProfileButtonNav = ({ toggleDropdown }: any) => {
+  const { user, logout, login } = useAuthHandler();
   const [isUserProfileVisible, setIsUserProfileVisible] = useState(false);
 
   const toggleUserProfileDropdown = () => {
@@ -90,9 +92,9 @@ const ProfileButtonNav = ({ user, onLogin, onLogout, toggleDropdown }: any) => {
                 event.preventDefault();
                 console.log("clicking here " + (user ? "logout" : "login"));
                 if (user) {
-                  onLogout();
+                  logout();
                 } else {
-                  onLogin();
+                  login();
                 }
               }}
             >

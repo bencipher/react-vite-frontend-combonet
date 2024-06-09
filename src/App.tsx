@@ -1,3 +1,4 @@
+import { createContext } from "react";
 import {
   Outlet,
   Route,
@@ -18,6 +19,7 @@ import ProtectedRoute from "./components/auth/ProtectedRouter";
 import Callback from "./pages/Callback";
 import axiosInstance from "./utils/axios";
 import ErrorHandler from "./components/ErrorComponent";
+import { AuthHandlerProvider } from "./contexts/AuthHandlerContext";
 
 const App = () => {
   const buildQueryParameters = (
@@ -58,7 +60,6 @@ const App = () => {
 
   const fetchJobs = async () => {
     const res = await axiosInstance.get("/jobs");
-    console.log(res.data);
     return res.data;
   };
 
@@ -125,7 +126,15 @@ const App = () => {
   );
 
   const router = createBrowserRouter(createRoutesFromElements(RoutesJSX));
-  return <RouterProvider router={router} />;
+  return (
+    <AuthHandlerProvider>
+      <RouterProvider router={router} />
+    </AuthHandlerProvider>
+  );
+  // return <RouterProvider router={router} />;
 };
+
+// (<AuthHandlerProvider.Provider value={login: loginFxn, logout: logoutFxn}>
+//   //    </AuthHandlerProvider.Provider>);
 
 export default App;
